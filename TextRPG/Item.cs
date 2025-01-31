@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace TextRPG
 {
-    public abstract class Item
+    internal abstract class Item
     {
         public int ItemNumber { get; set; } // 아이템 고유 번호
         public string Grade { get; set; } // 아이템 등급
@@ -27,7 +27,7 @@ namespace TextRPG
     }
 
     // 방어구 클래스
-    public class Armor : Item
+    internal class Armor : Item
     {
         public string EquipSlot { get; set; } // 착용 부위
         public int Defense { get; set; } // 방어력
@@ -48,7 +48,7 @@ namespace TextRPG
     }
 
     // 무기 클래스
-    public class Weapon : Item
+    internal class Weapon : Item
     {
         public int AttackPower { get; set; } // 공격력
 
@@ -67,7 +67,7 @@ namespace TextRPG
     }
 
     // 아이템 관리 클래스
-    public class ItemManager
+    internal class ItemManager
     {
         private List<Item> items = new List<Item>();
 
@@ -127,18 +127,7 @@ namespace TextRPG
             }
 
             // 아이템 목록 출력
-            ShowAllItems();
+            //ShowAllItems();
         }
-    }
-
-
-    enum equip_region
-    {
-        weapon,
-        head,
-        body,
-        hand,
-        leg,
-        foot
     }
 }
