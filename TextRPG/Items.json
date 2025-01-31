@@ -1,0 +1,28 @@
+[
+    {
+        "ItemNumber": 1,
+        "Type": "Armor",
+        "Grade": "Common",
+        "Name": "무쇠갑옷",
+        "Description": "무쇠로 만들어져 튼튼한 갑옷입니다.",
+        "EquipSlot": "body",
+        "Defense": 5
+    },
+    {
+        "ItemNumber": 2,
+        "Type": "Weapon",
+        "Grade": "rare",
+        "Name": "스파르타의 창",
+        "Description": "스파르타의 전사들이 사용했다는 전설의 창입니다",
+        "AttackPower": 7
+    },
+    {
+        "ItemNumber": 3,
+        "Type": "Weapon",
+        "Grade": "Common",
+        "Name": "낡은 검",
+        "Description": "쉽게 볼 수 있는 낡은 검 입니다",
+        "AttackPower": 2
+
+    }
+]

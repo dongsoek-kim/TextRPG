@@ -13,3 +13,7 @@ C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\refin
 C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.pdb
 C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.genruntimeconfig.cache
 C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\ref\TextRPG.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.csproj.AssemblyReference.cache
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.csproj.Up2Date
