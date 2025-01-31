@@ -1,0 +1,15 @@
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\TextRPG.exe
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\TextRPG.deps.json
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\TextRPG.runtimeconfig.json
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\TextRPG.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\bin\Debug\net8.0\TextRPG.pdb
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.AssemblyInfoInputs.cache
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.AssemblyInfo.cs
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.csproj.CoreCompileInputs.cache
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.sourcelink.json
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\refint\TextRPG.dll
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.pdb
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\TextRPG.genruntimeconfig.cache
+C:\Users\kdseh\Desktop\Spartan\Sec_Week\1\TextRPG\TextRPG\obj\Debug\net8.0\ref\TextRPG.dll
