@@ -17,7 +17,7 @@ namespace TextRPG
             Draw.GameStart(out name, out job);
             Player player = new Player(name,job);
             // 종료 대기
-            Console.SetCursorPosition(40, 5);
+            Console.SetCursorPosition(40, 1);
             player.ShowPlayer();
             Console.SetCursorPosition(40, 25);
             Console.WriteLine("아무 키나 눌러서 종료...");
