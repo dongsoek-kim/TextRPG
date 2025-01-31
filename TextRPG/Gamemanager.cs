@@ -9,6 +9,7 @@
             while (true)
             {
                 Console.ReadLine();
+                ; ;
             }
         }
     }
