@@ -21,7 +21,44 @@ namespace TextRPG
             DrawBox(startX, startY, width, height1);// 상단 프레임
             DrawBox(startX, startY + height1 - 1, width, height2);//하단프레임
         }
+        static public void DrawTitle()
+        {
+            Console.Clear(); // 콘솔 화면 정리
+            DrawFrame();
+            int startX = Console.WindowLeft + 15; // X 좌표 시작 위치
+            int startY = Console.WindowTop + 1;  // Y 좌표 시작 위치
 
+            // 텍스트 아트 (줄 단위로 배열에 저장)
+            string[] titleArt = new string[]
+            {
+"       ..                                         ",
+"      :+=-          .=:                           ",
+"       :=--.      .:==-                           ",
+"         --::   .-=-:                             ",
+"          :++- -+=:                                                    man",
+"          :=+**-.             .                                        of",
+"        -+===*@#=:           =#=::                                     lamancha",
+"        :--=+-+#=+=. ......::-**=-=.              ",
+"      .::==-: -+.:+=:   .-+%=:-===#%-             ",
+"     :-==--:  =+: .=++: .++++#*+=#@@+             ",
+"      .-:.-   -=-   -+=.    ++*#%#+=+=.           ",
+"   .-. ..:.   #-=    :==    ::+*#+-..-+=---.      ",
+"  -==-==+===-=++-::====+-.:--:*##++-.:#*:.::.     ",
+"  .:--=+=++++===   -+======+*-+##+=---*+-:.       ",
+"    .:-===--=+=:     ...::-=+=++-:::..-...--.     ",
+"     ..=----=++*-:.         .::..:-. -: ...:::    ",
+"      ::.   .:-=--==-::.    .:    -. :.           ",
+"               .:-=+==+==-::-                     ",
+"                 .:::::--:.-=-:.                  "
+            };
+
+            // 텍스트 아트를 원하는 좌표에서 출력
+            for (int i = 0; i < titleArt.Length; i++)
+            {
+                Console.SetCursorPosition(startX, startY + i); // 각 줄의 위치 설정
+                Console.WriteLine(titleArt[i]); // 출력
+            }
+        }
         static public void DrawBox(int x, int y, int width, int height)
         {
             //지붕 프레임
@@ -102,5 +139,6 @@ namespace TextRPG
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowHeight - 5);
         }
+         
     }
 }
