@@ -170,21 +170,6 @@ namespace TextRPG
             //ShowAllItems();
         }
 
-        //public void Inventory(bool[] PlayerAcquire)//인벤토리, 보유한 아이템리스트와 착용중인아이템 구분.
-        //{
-        //    int height = 0;
-        //    int itemNum = 0;
-        //    foreach (bool plyaerAcquire in PlayerAcquire)
-        //    {
-        //        if (plyaerAcquire)
-        //        {
-        //            Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
-        //            height += 2;
-        //            items[itemNum].DisplayInfo();
-        //        }
-        //        itemNum++;
-        //    }
-        //}
 
         public (float,float) Equipment(Player player)//튜플을 이용한 AttackPower,Defense출력
         {

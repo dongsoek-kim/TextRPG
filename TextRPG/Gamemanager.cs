@@ -22,9 +22,6 @@ namespace TextRPG
             item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
             Player player = new Player(name, job);//플레이어 생성
-            PlayerAcquire(player,item,2);
-            PlayerEquip(player, item, 2);
-            PlayerEquip(player, item, 2);
             while (true)
             {
                 MainScene(out path, player);

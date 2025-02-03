@@ -22,10 +22,7 @@ namespace TextRPG
             public int PlayerEquipItemNum { get; set; } = -1;
             public EquipInfo() { }
         }
-
-       public EquipInfo[] equipInfo = new EquipInfo[6];//장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot,5=weapon
-  
-       
+        public EquipInfo[] equipInfo = new EquipInfo[6];//장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot,5=weapon       
         public Player(string name, string job)
         {
             Name = name;
@@ -39,7 +36,7 @@ namespace TextRPG
         public void ShowPlayer(float equipmentAttakPower, float equipmentDefense)
         {
             Player_state(equipmentAttakPower, equipmentDefense);
-            Console.WriteLine($"        이름: {Name}\n|       레벨: {Level}\n|      직업: {Job}\n|        공격력: {AttackPower}\n|       방어력: {Defense}\n|       체력: {Health}\n|         골드: {Gold}");
+            Console.WriteLine($"이름: {Name}\n레벨: {Level}\n직업: {Job}\n공격력: {AttackPower}\n방어력: {Defense}\n체력: {Health}\n골드: {Gold}");
         }
         
         public void Acquire(int itemNum)
@@ -48,19 +45,17 @@ namespace TextRPG
         }
         public void Equip(int itemNum,ItemManager item)
         {
-            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum=itemNum;
-            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot = true;
+            int equipSlot = item.items[itemNum].EquipSlot;
+            equipInfo[equipSlot].PlayerEquipItemNum=itemNum;
+            equipInfo[equipSlot].PlayerEquipSlot = true;
             item.items[itemNum].Equip = true;
-            Console.WriteLine(equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum);
-            Console.ReadKey();
         }
         public void Unequip(int itemNum, ItemManager item)
         {
-            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot = false;
-            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum = -1;
+            int equipSlot = item.items[itemNum].EquipSlot;
+            equipInfo[equipSlot].PlayerEquipSlot = false;
+            equipInfo[equipSlot].PlayerEquipItemNum = -1;
             item.items[itemNum].Equip = false;
-            Console.WriteLine(equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum);
-            Console.ReadKey();
         }
         public void Player_state(float equipmentAttakPower,float equipmentDefense)
         {
