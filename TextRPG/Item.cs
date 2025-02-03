@@ -88,7 +88,7 @@ namespace TextRPG
             : base(itemNumber, grade, name,description)
         {
             AttackPower = attackPower;
-            EquipSlot= 6;
+            EquipSlot= 5;
             Type = "Weapon";
         }
 
@@ -171,31 +171,39 @@ namespace TextRPG
             //ShowAllItems();
         }
 
-        public void Inventory(bool[] _player_have)//인벤토리, 보유한 아이템리스트와 착용중인아이템 구분.
-        {
+        //public void Inventory(bool[] PlayerAcquire)//인벤토리, 보유한 아이템리스트와 착용중인아이템 구분.
+        //{
+        //    int height = 0;
+        //    int itemNum = 0;
+        //    foreach (bool plyaerAcquire in PlayerAcquire)
+        //    {
+        //        if (plyaerAcquire)
+        //        {
+        //            Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
+        //            height += 2;
+        //            items[itemNum].DisplayInfo();
+        //        }
+        //        itemNum++;
+        //    }
+        //}
 
-        }
-
-        public (float,float) Equipment(bool[] _player_have)//튜플을 이용한 AttackPower,Defense출력
+        public (float,float) Equipment(Player player)//튜플을 이용한 AttackPower,Defense출력
         {
-            int item_num = 0;
             AttackPower = 0;
             Defense = 0;
-            foreach (bool player_have in _player_have)
-            {
-                if (player_have)
+            for(int i = 0; i < player.equipInfo.Length; i++)
+            { if (player.equipInfo[i].PlayerEquipSlot)
                 {
-                    switch (items[item_num].Type)
+                    switch (items[player.equipInfo[i].PlayerEquipItemNum].Type)
                     {
                         case "Armor":
-                            Defense += ((Armor)items[item_num]).Defense;
+                            Defense += ((Armor)items[player.equipInfo[i].PlayerEquipItemNum]).Defense;
                             break;
                         case "Weapon":
-                            AttackPower += ((Weapon)items[item_num]).AttackPower;
+                            AttackPower += ((Weapon)items[player.equipInfo[i].PlayerEquipItemNum]).AttackPower;
                             break;
                     }
                 }
-                item_num++;
             }
             return (AttackPower, Defense);
         }

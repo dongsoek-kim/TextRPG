@@ -22,8 +22,9 @@ namespace TextRPG
             item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
             Player player = new Player(name, job);//플레이어 생성
-            Plyaer_Equip(player, item, 2);
-            Plyaer_Equip(player, item, 2);
+            PlayerAcquire(player,item,2);
+            PlayerEquip(player, item, 2);
+            PlayerEquip(player, item, 2);
             while (true)
             {
                 MainScene(out path, player);
@@ -34,6 +35,11 @@ namespace TextRPG
                     Draw.Setcuusor_up(1);
                     player.ShowPlayer(item.AttackPower,item.Defense);
                     Console.ReadKey();
+                }
+                else if(path ==2)
+                {
+                    Draw.DrawFrame();
+                    Draw.Inventory(player,item);
                 }
                 else if (path == 4)
                 {
@@ -54,22 +60,27 @@ namespace TextRPG
             Draw.DrawFrame();
             Draw.MainScene(out paht);
         }
-        static void Plyaer_Equip(Player player,ItemManager item ,int itemNum)
+        static void PlayerEquip(Player player,ItemManager item ,int itemNum)
         {
-            if (player.PlayerEquip[itemNum] ==false)
+            if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot==false)
             { 
-                player.Equip(itemNum); 
+                player.Equip(itemNum,item); 
             }
             else
             {
                 if(Draw.Is_Equip()==1)
                 {
-                    player.EquipmentReplacement(itemNum, item.items[itemNum].EquipSlot);
+                    player.EquipmentReplacement(itemNum, item.items[itemNum].EquipSlot,item);
                 }
             }
-
-            (float attackPower, float defense) = item.Equipment(player.PlayerEquip);
+            
+            (float attackPower, float defense) = item.Equipment(player);
             player.Player_state(attackPower, defense);
+        }
+        static void PlayerAcquire(Player player,ItemManager item,int itemNum)
+        {
+            player.Acquire(itemNum);
+            item.items[itemNum].Own = true;
         }
     }
 }

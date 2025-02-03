@@ -201,7 +201,19 @@ namespace TextRPG
 
         public static void Inventory(Player player,ItemManager item)//인벤토리에서 보유중인 아이템 출력
         {
-
+            int height = 0;
+            int itemNum = 0;
+            foreach (bool plyaerAcquire in player.PlayerAcquire)
+            {
+                if (plyaerAcquire)
+                {
+                    Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
+                    height += 2;
+                    item.items[itemNum].DisplayInfo();
+                }
+                itemNum++;
+            }
+            Console.ReadKey();
         }
 
         public static void SetCursorAndWrite_up(int top, string text)//상하만

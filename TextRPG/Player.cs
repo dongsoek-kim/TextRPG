@@ -16,7 +16,6 @@ namespace TextRPG
         float Health { get; set; }
         int Gold { get; set; }
         public bool[] PlayerAcquire { get; set; } = new bool[20];
-        public bool[] PlayerEquip { get; set; } = new bool[20];
         public struct EquipInfo
         {
             public bool PlayerEquipSlot { get; set; } = false;
@@ -47,13 +46,15 @@ namespace TextRPG
         {
             PlayerAcquire[itemNum] = true;
         }
-        public void Equip(int itemNum)
+        public void Equip(int itemNum,ItemManager item)
         {
-            PlayerEquip[itemNum] = true;
+            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum=itemNum;
+            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot = true;
         }
-        public void Unequip(int itemNum)
+        public void Unequip(int itemNum, ItemManager item)
         {
-            PlayerEquip[itemNum] = false;
+            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot = false;
+            equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum = -1;
         }
         public void Player_state(float equipmentAttakPower,float equipmentDefense)
         {
@@ -61,11 +62,11 @@ namespace TextRPG
             Defense = 5f + equipmentDefense + (1f * (Level - 1));
         }
 
-        public void EquipmentReplacement(int itemNum,int equipSlot)
+        public void EquipmentReplacement(int itemNum,int equipSlot,ItemManager item)
         {
             int prevEquip = equipInfo[equipSlot].PlayerEquipItemNum;
-            Unequip(prevEquip);
-            Equip(itemNum);
+            Unequip(prevEquip,item);
+            Equip(itemNum,item);
             equipInfo[equipSlot].PlayerEquipItemNum = itemNum;
         }
     }
