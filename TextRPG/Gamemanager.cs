@@ -28,6 +28,7 @@ namespace TextRPG
                 MainScene(out path, player);
                 if (path == 1)
                 {
+
                     Draw.DrawFrame();
                     Draw.Setcuusor_up(1);
                     player.ShowPlayer();

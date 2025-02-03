@@ -28,7 +28,7 @@ namespace TextRPG
         }
         public void ShowPlayer()
         {
-            Console.WriteLine($"이름: {Name}\n| 레벨: {level}\n| 직업: {job}\n| 공격력: {attackPower}\n| 방어력: {defense}\n| 체력: {health}\n| 골드: {gold}");
+            Console.WriteLine($"이름: {Name}\n  레벨: {level}\n  직업: {job}\n  공격력: {attackPower}\n  방어력: {defense}\n  체력: {health}\n  골드: {gold}");
         }
     }
 }
