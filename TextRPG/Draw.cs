@@ -209,7 +209,15 @@ namespace TextRPG
                 {
                     Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
                     height += 2;
-                    item.items[itemNum].DisplayInfo();
+                    if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot)
+                    {
+                        Console.Write(" [E]");
+                    }
+                    else
+                    {
+                        Console.Write("    ");
+                    }
+                        item.items[itemNum].DisplayInfo();
                 }
                 itemNum++;
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -16,7 +17,8 @@ namespace TextRPG
         public int EquipSlot { get; set; } // //장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot , 5= weapon
         public string Type { get; set; }
         public bool Own { get; set; }//소유여부
-        
+        public bool Equip { get; set; }//장착여부
+
 
         public Item(int itemNumber, string grade, string name, string description)
         {
@@ -73,9 +75,7 @@ namespace TextRPG
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"[방어구] 번호: {ItemNumber}, 등급: {Grade},이름: {Name}");
-            Console.Write($"설명: {Description}, 착용 부위: {EquipSlot}, 방어력: {Defense},소유여부: ");
-            Console.WriteLine(Own?"O":"X");
+            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 방어력: {Defense} | 설명: {Description}");
         }
     }
 
@@ -94,10 +94,9 @@ namespace TextRPG
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"[무기] 번호: {ItemNumber}, 등급: {Grade},이름: {Name}");
-            Console.Write($"설명: {Description}, 공격력: {AttackPower},소유여부: ");
-            Console.WriteLine(Own ? "O" : "X");
+            Console.WriteLine($" 이름: {Name} | 등급: {Grade} | 공격력: {AttackPower} | 설명: {Description}");
         }
+
     }
 
     // 아이템 관리 클래스
