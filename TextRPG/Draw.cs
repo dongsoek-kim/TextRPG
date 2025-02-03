@@ -10,7 +10,7 @@ namespace TextRPG
 {
     internal class Draw
     {
-        static public void DrawFrame()
+        public static void DrawFrame()
         {
             Console.Clear();
             int width = Console.WindowWidth - 1;  // 프레임 너비
@@ -22,7 +22,7 @@ namespace TextRPG
             DrawBox(startX, startY, width, height1);// 상단 프레임
             DrawBox(startX, startY + height1 - 1, width, height2);//하단프레임
         }
-        static public void DrawTitle()
+        public static void DrawTitle()
         {
             Console.Clear(); // 콘솔 화면 정리
             DrawFrame();
@@ -60,7 +60,7 @@ namespace TextRPG
                 Console.WriteLine(titleArt[i]); // 출력
             }
         }
-        static public void DrawBox(int x, int y, int width, int height)
+        public static void DrawBox(int x, int y, int width, int height)
         {
             //지붕 프레임
             Console.SetCursorPosition(x, y);
@@ -80,7 +80,7 @@ namespace TextRPG
             Console.WriteLine(new string('-', width));
         }
 
-        static public void GameStart(out string name,out string job)
+        public static void GameStart(out string name,out string job)
         {
             SetCursorAndWrite_up(1, "스파르타 던전에 오신 여러분 환영합니다.");
             string? input;
@@ -106,7 +106,7 @@ namespace TextRPG
                 SetCursorAndWrite_up(7, "1.전사");
                 Console.WriteLine();
                 SetCursorAndWrite_up(9, "2.도적");
-                SetCursor_down(0);
+                SetCursor_down(1);
                 input = Console.ReadLine(); // 값 입력 받기
                 Console.Clear();
                 DrawFrame();
@@ -126,8 +126,43 @@ namespace TextRPG
                 job = "도적";
             }
         }//게임시작 대사
+        public static int Is_Equip()
+        {
+            DrawFrame();
+            int input;
+            do
+            {
+                SetCursorAndWrite_up(1, "이미 장착된 부위입니다. 장비를 교체하시겠습니까?");
+                Console.WriteLine();
+                Console.WriteLine();
+                SetCursorAndWrite_up(7, "1.예");
+                Console.WriteLine();
+                SetCursorAndWrite_up(9, "2.아니오");
+                SetCursor_down(1);
+                input = int.TryParse(Console.ReadLine(), out int n) ? n : 0;
+                Console.Clear();
+                DrawFrame();
 
-        static public void MainScene(out int? path)
+                if (input != 1 && input != 2)
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("1 또는 2를 입력하세요");
+                }
+            } while (input != 1 && input != 2);
+            if (input == 1)
+            {
+                SetCursor_down(1);
+                Console.WriteLine("장착된 장비를 벗고 새로운 장비를 장착합니다");
+            }
+            else
+            {
+                SetCursor_down(1);
+                Console.WriteLine("장비를 교체하지 않습니다");
+            }
+            return input;
+
+        }
+         public static void MainScene(out int? path)
         {
             DrawFrame();
             path = null;
@@ -140,7 +175,7 @@ namespace TextRPG
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             do
             {
-                SetCursor_down(0);
+                SetCursor_down(1);
                 string input = Console.ReadLine();
                 switch (input)
                 {
@@ -163,30 +198,34 @@ namespace TextRPG
                 }
             } while (path == null);
         }
-        static void SetCursorAndWrite_up(int top, string text)//상하만
+
+        public static void Inventory(Player player,ItemManager item)//인벤토리에서 보유중인 아이템 출력
         {
-            Console.SetCursorPosition(Console.WindowLeft + 1, Console.WindowTop+top);
-            Console.Write(text); 
+
+        }
+
+        public static void SetCursorAndWrite_up(int top, string text)//상하만
+        {
+            Console.SetCursorPosition(Console.WindowLeft + 1, Console.WindowTop + top);
+            Console.Write(text);
             // 한글 문자도 제대로 처리하기 위해 바이트 길이 계산
             int textByteLength = System.Text.Encoding.Default.GetByteCount(text);
-
-            // 남은 공간 계산: 전체 너비에서 현재 커서 위치(2)와 텍스트의 바이트 길이를 뺀 값
             int remainingSpace = Console.WindowWidth - (2 + textByteLength);
 
             if (remainingSpace > 0)
             {
-               Console.Write(new string(' ', remainingSpace));
+                Console.Write(new string(' ', remainingSpace));
             }
-            Console.WriteLine(remainingSpace);
         }
         public static void Setcuusor_up(int top)
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + top);
         }
-        static void SetCursor_down(int down)//아랫단
+        public static void SetCursor_down(int down)//아랫단
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowHeight - 5+down);
         }
 
+       
     }
 }

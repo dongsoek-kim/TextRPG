@@ -9,26 +9,64 @@ namespace TextRPG
     internal class Player
     {
         string Name;
-        int level { get; set; }
-        string job { get; set; }
-        int attackPower { get; set; }
-        int defense { get; set; }
-        float health { get; set; }
-        int gold { get; set; }
-        
-        public Player(string _name, string _job)
+        int Level { get; set; }
+        string Job { get; set; }
+        float AttackPower { get; set; }
+        float Defense { get; set; }
+        float Health { get; set; }
+        int Gold { get; set; }
+        public bool[] PlayerAcquire { get; set; } = new bool[20];
+        public bool[] PlayerEquip { get; set; } = new bool[20];
+        public struct EquipInfo
         {
-            Name = _name;
-            level = 1;
-            job = _job;
-            attackPower = 10;
-            defense = 5;
-            health = 100f;
-            gold = 1000;
+            public bool PlayerEquipSlot { get; set; } = false;
+            public int PlayerEquipItemNum { get; set; } = -1;
+            public EquipInfo() { }
         }
-        public void ShowPlayer()
+
+       public EquipInfo[] equipInfo = new EquipInfo[6];//장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot,5=weapon
+  
+       
+        public Player(string name, string job)
         {
-            Console.WriteLine($"이름: {Name}\n  레벨: {level}\n  직업: {job}\n  공격력: {attackPower}\n  방어력: {defense}\n  체력: {health}\n  골드: {gold}");
+            Name = name;
+            Level = 1;
+            Job = job;
+            AttackPower = 10;
+            Defense = 5;
+            Health = 100f;
+            Gold = 1000;
+        }
+        public void ShowPlayer(float equipmentAttakPower, float equipmentDefense)
+        {
+            Player_state(equipmentAttakPower, equipmentDefense);
+            Console.WriteLine($"이름: {Name}\n| 레벨: {Level}\n| 직업: {Job}\n| 공격력: {AttackPower}\n| 방어력: {Defense}\n| 체력: {Health}\n| 골드: {Gold}");
+        }
+        
+        public void Acquire(int itemNum)
+        {
+            PlayerAcquire[itemNum] = true;
+        }
+        public void Equip(int itemNum)
+        {
+            PlayerEquip[itemNum] = true;
+        }
+        public void Unequip(int itemNum)
+        {
+            PlayerEquip[itemNum] = false;
+        }
+        public void Player_state(float equipmentAttakPower,float equipmentDefense)
+        {
+            AttackPower = 10f + equipmentAttakPower + (0.5f * (Level-1));
+            Defense = 5f + equipmentDefense + (1f * (Level - 1));
+        }
+
+        public void EquipmentReplacement(int itemNum,int equipSlot)
+        {
+            int prevEquip = equipInfo[equipSlot].PlayerEquipItemNum;
+            Unequip(prevEquip);
+            Equip(itemNum);
+            equipInfo[equipSlot].PlayerEquipItemNum = itemNum;
         }
     }
 }

@@ -1,6 +1,6 @@
 [//착용부위 : head , body , arm , leg , foot
     {
-        "ItemNumber": 1,
+        "ItemNumber": 0,
         "Type": "Armor",
         "Grade": "Common",
         "Name": "무쇠갑옷",
@@ -9,7 +9,7 @@
         "Defense": 5
     },
     {
-        "ItemNumber": 2,
+        "ItemNumber": 1,
         "Type": "Weapon",
         "Grade": "rare",
         "Name": "스파르타의 창",
@@ -17,7 +17,7 @@
         "AttackPower": 7
     },
     {
-        "ItemNumber": 3,
+        "ItemNumber": 2,
         "Type": "Weapon",
         "Grade": "Common",
         "Name": "낡은 검",

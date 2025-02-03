@@ -17,12 +17,13 @@ namespace TextRPG
             string name;
             string job;
             int? path;
-            ItemManager item = new ItemManager();
-            // 프레임 출력
             Draw.DrawFrame();
-            item.ItemLoad();
+            ItemManager item = new ItemManager();
+            item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
-            Player player = new Player(name, job);
+            Player player = new Player(name, job);//플레이어 생성
+            Plyaer_Equip(player, item, 2);
+            Plyaer_Equip(player, item, 2);
             while (true)
             {
                 MainScene(out path, player);
@@ -31,7 +32,7 @@ namespace TextRPG
 
                     Draw.DrawFrame();
                     Draw.Setcuusor_up(1);
-                    player.ShowPlayer();
+                    player.ShowPlayer(item.AttackPower,item.Defense);
                     Console.ReadKey();
                 }
                 else if (path == 4)
@@ -52,6 +53,23 @@ namespace TextRPG
         {
             Draw.DrawFrame();
             Draw.MainScene(out paht);
+        }
+        static void Plyaer_Equip(Player player,ItemManager item ,int itemNum)
+        {
+            if (player.PlayerEquip[itemNum] ==false)
+            { 
+                player.Equip(itemNum); 
+            }
+            else
+            {
+                if(Draw.Is_Equip()==1)
+                {
+                    player.EquipmentReplacement(itemNum, item.items[itemNum].EquipSlot);
+                }
+            }
+
+            (float attackPower, float defense) = item.Equipment(player.PlayerEquip);
+            player.Player_state(attackPower, defense);
         }
     }
 }
