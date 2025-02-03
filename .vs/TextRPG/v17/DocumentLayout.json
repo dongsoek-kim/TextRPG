@@ -39,8 +39,7 @@
               "ViewState": "AgIAAAsAAAAAAAAAAADwvx4AAACBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T10:20:22.419Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -52,8 +51,7 @@
               "RelativeToolTip": "TextRPG\\Items.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-31T08:54:35.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T08:54:35.264Z"
             },
             {
               "$type": "Document",
@@ -78,8 +76,7 @@
               "RelativeToolTip": "TextRPG\\Draw.cs",
               "ViewState": "AgIAAIAAAAAAAAAAAAAUwKUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T07:27:26.934Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T07:27:26.934Z"
             }
           ]
         }
