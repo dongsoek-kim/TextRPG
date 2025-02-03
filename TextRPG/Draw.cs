@@ -1,4 +1,6 @@
-﻿using System;
+﻿//전체화면시 높이 209/ 너비 51
+//출력관리
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +12,13 @@ namespace TextRPG
     {
         static public void DrawFrame()
         {
+            Console.Clear();
             int width = Console.WindowWidth - 1;  // 프레임 너비
             int height1 = Console.WindowHeight - 7; // 상단 프레임 높이 (하단의 두 배)
             int height2 = Console.WindowTop + 7;  // 하단 프레임 높이
             int startX = 0;   // X 시작 위치
             int startY = 0;   // Y 시작 위치
-
-            //Console.Clear();
-
+             //Console.Clear();
             DrawBox(startX, startY, width, height1);// 상단 프레임
             DrawBox(startX, startY + height1 - 1, width, height2);//하단프레임
         }
@@ -63,20 +64,20 @@ namespace TextRPG
         {
             //지붕 프레임
             Console.SetCursorPosition(x, y);
-            Console.WriteLine(new string('*', width));
+            Console.WriteLine(new string('-', width));
 
             // 중간 프레임
             for (int i = 1; i < height - 1; i++)
             {
                 Console.SetCursorPosition(x, y + i);
-                Console.Write('*');
+                Console.Write('|');
                 Console.SetCursorPosition(x + width - 1, y + i);
-                Console.Write('*');
+                Console.Write('|');
             }
 
             // 바닥프레임
             Console.SetCursorPosition(x, y + height - 1);
-            Console.WriteLine(new string('*', width));
+            Console.WriteLine(new string('-', width));
         }
 
         static public void GameStart(out string name,out string job)
@@ -103,9 +104,9 @@ namespace TextRPG
                 SetCursorAndWrite(1, "원하시는 직업을 선택해주세요");
                 Console.WriteLine();
                 Console.WriteLine();
-                SetCursorAndWrite(3, "1.전사");
+                SetCursorAndWrite(7, "1.전사");
                 Console.WriteLine();
-                SetCursorAndWrite(4, "2.도적");
+                SetCursorAndWrite(9, "2.도적");
                 SetCursor();
                 input = Console.ReadLine(); // 값 입력 받기
                 Console.Clear();
@@ -124,21 +125,60 @@ namespace TextRPG
             {
                 job = "도적";
             }
-        }
+        }//게임시작 대사
         /*static void SetCursorAndWrite(int left,int top, string text)//좌우 상하
         {
             Console.SetCursorPosition(Console.WindowLeft + left, Console.WindowTop + top);
             Console.WriteLine(text);
         }*/
+        static public void MainScene(out int? path)
+        {
+            Console.Clear();
+            DrawFrame();
+            path = null;
+            SetCursorAndWrite(1, "스파르타 마을에 오신 여러분 환영합니다.");
+            SetCursorAndWrite(2, "이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+            SetCursorAndWrite(6, "1.상태 보기");
+            SetCursorAndWrite(7, "2.인벤토리");
+            SetCursorAndWrite(8, "3.상점");
+            SetCursorAndWrite(12, "원하시는 행동을 입력해주세요.");
+            do
+            {
+                SetCursor();
+                string input = Console.ReadLine();
+                switch (input)
+                {
+                    case "1":
+                        path = 1;
+                        break;
+                    case "2":
+                        path = 2;
+                        break;
+                    case "3":
+                        path = 3;
+                        break;
+                    case "4":
+                        path = 4;
+                        break;
+                    default:
+                        SetCursorAndWrite(12, "잘못된 입력입니다.");
+                        break;
+                }
+            } while (path == null);
+        }
         static void SetCursorAndWrite(int top, string text)//상하만
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop+top);
             Console.WriteLine(text);
         }
+        public static void Setcuusor_up(int top)
+        {
+            Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + top);
+        }
         static void SetCursor()//아랫단
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowHeight - 5);
         }
-         
+
     }
 }
