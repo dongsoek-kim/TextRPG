@@ -1,6 +1,6 @@
-[//착용부위 : head , body , arm , leg , foot
+[ //착용부위 : head , body , arm , leg , foot
     {
-        "ItemNumber": 1,
+        "ItemNumber": 0,
         "Type": "Armor",
         "Grade": "Common",
         "Name": "무쇠갑옷",
@@ -9,20 +9,170 @@
         "Defense": 5
     },
     {
-        "ItemNumber": 2,
+        "ItemNumber": 1,
         "Type": "Weapon",
         "Grade": "rare",
         "Name": "스파르타의 창",
-        "Description": "스파르타의 전사들이 사용했다는 전설의 창입니다",
+        "Description": "스파르타의 전사들이 사용했다는 전설의 창입니다.",
         "AttackPower": 7
+    },
+    {
+        "ItemNumber": 2,
+        "Type": "Weapon",
+        "Grade": "Common",
+        "Name": "낡은 검",
+        "Description": "쉽게 볼 수 있는 낡은 검 입니다.",
+        "AttackPower": 2
     },
     {
         "ItemNumber": 3,
         "Type": "Weapon",
+        "Grade": "Unique",
+        "Name": "드래곤슬레이어",
+        "Description": "용을 참살한검, 사실은 와이번슬레이어이다.",
+        "AttackPower": 15
+    },
+    {
+        "ItemNumber": 4,
+        "Type": "Armor",
+        "Grade": "rare",
+        "Name": "판금갑옷",
+        "Description": "기사들이 입는 갑옷 무겁다.",
+        "EquipSlot": "body",
+        "Defense": 10
+    },
+    {
+        "ItemNumber": 5,
+        "Type": "Armor",
+        "Grade": "Unique",
+        "Name": "미스릴갑옷",
+        "Description": "전설의 전도체로만든 미스릴갑옷, 여름에입으면 더워진다.",
+        "EquipSlot": "body",
+        "Defense": 20
+    },
+    {
+        "ItemNumber": 6,
+        "Type": "Armor",
         "Grade": "Common",
-        "Name": "낡은 검",
-        "Description": "쉽게 볼 수 있는 낡은 검 입니다",
-        "AttackPower": 2
-
+        "Name": "무쇠헬멧",
+        "Description": "무쇠로 만들어져 튼튼한 헬멧입니다.",
+        "EquipSlot": "head",
+        "Defense": 3
+    },
+    {
+        "ItemNumber": 7,
+        "Type": "Armor",
+        "Grade": "rare",
+        "Name": "판금헬멧",
+        "Description": "갑옷과 세트,세트로입으면 두배로 무겁다.",
+        "EquipSlot": "head",
+        "Defense": 8
+    },
+    {
+        "ItemNumber": 8,
+        "Type": "Armor",
+        "Grade": "Unique",
+        "Name": "기력의 머리띠",
+        "Description": "죽을위기에서도 한번은 살려준다는 전설이있다..",
+        "EquipSlot": "head",
+        "Defense": 14
+    },
+    {
+        "ItemNumber": 9,
+        "Type": "Armor",
+        "Grade": "Common",
+        "Name": "가죽장갑",
+        "Description": "가죽으로 만들어진 장갑.",
+        "EquipSlot": "arm",
+        "Defense": 1
+    },
+    {
+        "ItemNumber": 10,
+        "Type": "Armor",
+        "Grade": "rare",
+        "Name": "강철 브레이슬렛",
+        "Description": "갑옷과 세트,세트로입으면 세배로 무겁다.",
+        "EquipSlot": "arm",
+        "Defense": 5
+    },
+    {
+        "ItemNumber": 11,
+        "Type": "Armor",
+        "Grade": "Unique",
+        "Name": "마력의 팔찌",
+        "Description": "마력이없는 세계에서 마력을 띄우는 팔찌,차고있으면 방어력이올라간다.",
+        "EquipSlot": "arm",
+        "Defense": 11
+    },
+    {
+        "ItemNumber": 12,
+        "Type": "Armor",
+        "Grade": "Common",
+        "Name": "무쇠각반",
+        "Description": "무쇠로 만들어져 튼튼한 각반입니다.",
+        "EquipSlot": "leg",
+        "Defense": 3
+    },
+    {
+        "ItemNumber": 13,
+        "Type": "Armor",
+        "Grade": "rare",
+        "Name": "판금각반",
+        "Description": "갑옷과 세트,세트로입으면 네배로 무겁다.",
+        "EquipSlot": "leg",
+        "Defense": 7
+    },
+    {
+        "ItemNumber": 14,
+        "Type": "Armor",
+        "Grade": "Unique",
+        "Name": "오우거 파워 각반",
+        "Description": "음? 이런이름이엇나?.",
+        "EquipSlot": "leg",
+        "Defense": 15
+    },
+    {
+        "ItemNumber": 15,
+        "Type": "Armor",
+        "Grade": "Common",
+        "Name": "가죽신발",
+        "Description": "가죽으로 만든 튼튼한 신발입니다.",
+        "EquipSlot": "foot",
+        "Defense": 1
+    },
+    {
+        "ItemNumber": 16,
+        "Type": "Armor",
+        "Grade": "rare",
+        "Name": "판금신발",
+        "Description": "갑옷과 세트,세트로입으면 다섯배로 무겁다.",
+        "EquipSlot": "foot",
+        "Defense": 3
+    },
+    {
+        "ItemNumber": 17,
+        "Type": "Armor",
+        "Grade": "Unique",
+        "Name": "헤르메스의 신발",
+        "Description": "없으면 섭섭한 신발.하늘도 날수있을것같다",
+        "EquipSlot": "foot",
+        "Defense": 10
+    },
+    {
+        "ItemNumber": 18,
+        "Type": "Armor",
+        "Grade": "Admin",
+        "Name": "운영자모자",
+        "Description": "개발자용 모자",
+        "EquipSlot": "head",
+        "Defense": 9999
+    },
+    {
+        "ItemNumber": 19,
+        "Type": "Weapon",
+        "Grade": "Admin",
+        "Name": "운영자회초리",
+        "Description": "개발자용 회초리",
+        "AttackPower": 9999
     }
 ]

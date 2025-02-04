@@ -17,20 +17,33 @@ namespace TextRPG
             string name;
             string job;
             int? path;
-            ItemManager item = new ItemManager();
-            // 프레임 출력
             Draw.DrawFrame();
-            item.ItemLoad();
+            ItemManager item = new ItemManager();
+            item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
-            Player player = new Player(name, job);
+            Player player = new Player(name, job);//플레이어 생성
+            Merchant merchant= new Merchant();
             while (true)
             {
                 MainScene(out path, player);
                 if (path == 1)
                 {
+
                     Draw.DrawFrame();
                     Draw.Setcuusor_up(1);
-                    player.ShowPlayer();
+                    player.ShowPlayer(item.AttackPower,item.Defense);
+                    Console.ReadKey();
+                }
+                else if(path ==2)
+                {
+                    Draw.DrawFrame();
+                    Draw.Inventory(player,item);
+                    Console.ReadKey();
+                }
+                else if(path==3)
+                {
+                    Draw.DrawFrame();      
+                    Draw.Merchant(player, merchant, item);
                     Console.ReadKey();
                 }
                 else if (path == 4)
@@ -51,6 +64,28 @@ namespace TextRPG
         {
             Draw.DrawFrame();
             Draw.MainScene(out paht);
+        }
+        static void PlayerEquip(Player player,ItemManager item ,int itemNum)
+        {
+            if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot==false)
+            { 
+                player.Equip(itemNum,item); 
+            }
+            else
+            {
+                if(Draw.Is_Equip()==1)
+                {
+                    player.EquipmentReplacement(itemNum, item.items[itemNum].EquipSlot,item);
+                }
+            }
+            
+            (float attackPower, float defense) = item.Equipment(player);
+            player.Player_state(attackPower, defense);
+        }
+        static void PlayerAcquire(Player player,ItemManager item,int itemNum)
+        {
+            player.Acquire(itemNum);
+            item.items[itemNum].Own = true;
         }
     }
 }

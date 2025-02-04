@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -13,7 +14,11 @@ namespace TextRPG
         public string Grade { get; set; } // 아이템 등급
         public string Name { get; set; }//아이템 이름
         public string Description { get; set; } // 아이템 설명
+        public int EquipSlot { get; set; } // //장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot , 5= weapon
+        public string Type { get; set; }
         public bool Own { get; set; }//소유여부
+        public bool Equip { get; set; }//장착여부
+
 
         public Item(int itemNumber, string grade, string name, string description)
         {
@@ -29,21 +34,48 @@ namespace TextRPG
     // 방어구 클래스
     internal class Armor : Item
     {
-        public string EquipSlot { get; set; } // 착용 부위
         public int Defense { get; set; } // 방어력
 
         public Armor(int itemNumber, string grade, string name,string description, string equipSlot, int defense)
             : base(itemNumber, grade, name, description)
         {
-            EquipSlot = equipSlot;
+            switch (equipSlot)
+            {
+                case ("head"):
+                    {
+                        EquipSlot = 0;
+                        break;
+                    }
+                case ("body"):
+                    {
+                        EquipSlot = 1;
+                        break;
+
+                    }
+                case ("arm"):
+                    {
+                        EquipSlot = 2;
+                        break;
+                    }
+                case ("leg"):
+                    {  
+                        EquipSlot = 3;
+                        break;   
+                    }
+                case ("foot"):
+                    {
+                        EquipSlot = 4;
+                        break;
+                    }
+            }            //장착부위: 0=head , 1=body , 2=arm , 3=leg , 4=foot
+
             Defense = defense;
+            Type = "Armor";
         }
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"[방어구] 번호: {ItemNumber}, 등급: {Grade},이름: {Name}");
-            Console.Write($"설명: {Description}, 착용 부위: {EquipSlot}, 방어력: {Defense},소유여부: ");
-            Console.WriteLine(Own?"O":"X");
+            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 방어력: {Defense} | 설명: {Description}");
         }
     }
 
@@ -56,26 +88,29 @@ namespace TextRPG
             : base(itemNumber, grade, name,description)
         {
             AttackPower = attackPower;
+            EquipSlot= 5;
+            Type = "Weapon";
         }
 
         public override void DisplayInfo()
         {
-            Console.WriteLine($"[무기] 번호: {ItemNumber}, 등급: {Grade},이름: {Name}");
-            Console.Write($"설명: {Description}, 공격력: {AttackPower},소유여부: ");
-            Console.WriteLine(Own ? "O" : "X");
+            Console.WriteLine($" 이름: {Name} | 등급: {Grade} | 공격력: {AttackPower} | 설명: {Description}");
         }
+
     }
 
     // 아이템 관리 클래스
     internal class ItemManager
     {
-        private List<Item> items = new List<Item>();
-
+        public List<Item> items = new List<Item>();
+        public float AttackPower { get; set; } = 0;
+        public float Defense { get; set; } = 0;
+        public float Health { get; set; }= 0;
         public void AddItem(Item item)
         {
             items.Add(item);
         }
-
+        
         public void ShowAllItems()
         {
             int height = 0;
@@ -85,6 +120,11 @@ namespace TextRPG
                 height+=2;
                 item.DisplayInfo();
             }
+        }
+        public void ShowItem(int item_num)
+        {
+            Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop);
+            items[item_num].DisplayInfo();
         }
         public void ItemLoad()
         {
@@ -128,6 +168,28 @@ namespace TextRPG
 
             // 아이템 목록 출력
             //ShowAllItems();
+        }
+
+
+        public (float,float) Equipment(Player player)//튜플을 이용한 AttackPower,Defense출력
+        {
+            AttackPower = 0;
+            Defense = 0;
+            for(int i = 0; i < player.equipInfo.Length; i++)
+            { if (player.equipInfo[i].PlayerEquipSlot)
+                {
+                    switch (items[player.equipInfo[i].PlayerEquipItemNum].Type)
+                    {
+                        case "Armor":
+                            Defense += ((Armor)items[player.equipInfo[i].PlayerEquipItemNum]).Defense;
+                            break;
+                        case "Weapon":
+                            AttackPower += ((Weapon)items[player.equipInfo[i].PlayerEquipItemNum]).AttackPower;
+                            break;
+                    }
+                }
+            }
+            return (AttackPower, Defense);
         }
     }
 }
