@@ -9,15 +9,17 @@ namespace TextRPG
 {
     internal class Merchant
     {
-        public HashSet<int> SellItemNum = new HashSet<int>();//중복을 자동으로 방시하는 HashSet
+        public HashSet<int> SellItemset = new HashSet<int>();//중복을 자동으로 방시하는 HashSet
+        public List<int> SellItemNum =new List<int>();
         private int[] CommenItemNum = new int[6] { 0, 2, 6, 9, 12, 15 };
         private int[] RareItemNum = new int[6] { 1, 4, 7, 10, 13, 16 };
         private int[] UniqueItemNum = new int[6] { 3, 5, 8, 11, 14, 17 };
         
-        public void ListOfSellItemNum(Player player)
+        public void MakeListOfSellItemNum(Player player)
         { 
             Random random = new Random();
             int randomChance = random.Next(1, 101);
+            SellItemset.Clear();
             SellItemNum.Clear();
             if (player.Level < 5)
             { 
@@ -86,6 +88,7 @@ namespace TextRPG
                 }
             }
             RemoveAcquiredItems(player);//플레이어가 소유한 아이템 목록에서 제거
+            SellItemNum = new List<int>(SellItemset);//리스트에 삽입
         }
 
         private void AddItems(int[] itemArray, int count)// 배열에서 랜덤으로 아이템 번호를 선택
@@ -95,7 +98,7 @@ namespace TextRPG
             {
                 int randomIndex = random.Next(itemArray.Length); 
                 int itemNumber = itemArray[randomIndex];  
-                SellItemNum.Add(itemNumber);
+                SellItemset.Add(itemNumber);
             }
         }
         public void RemoveAcquiredItems(Player player)
@@ -108,6 +111,12 @@ namespace TextRPG
                     SellItemNum.Remove(item);  
                 }
             }
+        }
+        public void transaction(Player player, int sellItemNum,int price)
+        {
+
+            player.PlayerAcquire[sellItemNum] = true;
+            player.Gold-=price;
         }
     }
 }

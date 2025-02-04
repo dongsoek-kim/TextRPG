@@ -2,9 +2,14 @@
 //출력관리
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TextRPG
 {
@@ -21,44 +26,6 @@ namespace TextRPG
              //Console.Clear();
             DrawBox(startX, startY, width, height1);// 상단 프레임
             DrawBox(startX, startY + height1 - 1, width, height2);//하단프레임
-        }
-        public static void DrawTitle()
-        {
-            Console.Clear(); // 콘솔 화면 정리
-            DrawFrame();
-            int startX = Console.WindowLeft + 15; // X 좌표 시작 위치
-            int startY = Console.WindowTop + 1;  // Y 좌표 시작 위치
-
-            // 텍스트 아트 (줄 단위로 배열에 저장)
-            string[] titleArt = new string[]
-            {
-"       ..                                         ",
-"      :+=-          .=:                           ",
-"       :=--.      .:==-                           ",
-"         --::   .-=-:                             ",
-"          :++- -+=:                                                    man",
-"          :=+**-.             .                                        of",
-"        -+===*@#=:           =#=::                                     lamancha",
-"        :--=+-+#=+=. ......::-**=-=.              ",
-"      .::==-: -+.:+=:   .-+%=:-===#%-             ",
-"     :-==--:  =+: .=++: .++++#*+=#@@+             ",
-"      .-:.-   -=-   -+=.    ++*#%#+=+=.           ",
-"   .-. ..:.   #-=    :==    ::+*#+-..-+=---.      ",
-"  -==-==+===-=++-::====+-.:--:*##++-.:#*:.::.     ",
-"  .:--=+=++++===   -+======+*-+##+=---*+-:.       ",
-"    .:-===--=+=:     ...::-=+=++-:::..-...--.     ",
-"     ..=----=++*-:.         .::..:-. -: ...:::    ",
-"      ::.   .:-=--==-::.    .:    -. :.           ",
-"               .:-=+==+==-::-                     ",
-"                 .:::::--:.-=-:.                  "
-            };
-
-            // 텍스트 아트를 원하는 좌표에서 출력
-            for (int i = 0; i < titleArt.Length; i++)
-            {
-                Console.SetCursorPosition(startX, startY + i); // 각 줄의 위치 설정
-                Console.WriteLine(titleArt[i]); // 출력
-            }
         }
         public static void DrawBox(int x, int y, int width, int height)
         {
@@ -171,6 +138,8 @@ namespace TextRPG
             SetCursorAndWrite_up(6, "1.상태 보기");
             SetCursorAndWrite_up(7, "2.인벤토리");
             SetCursorAndWrite_up(8, "3.상점");
+            SetCursorAndWrite_up(9, "4.던전입장");
+            SetCursorAndWrite_up(10,"5.휴식하기");
             SetCursor_down(0);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             do
@@ -193,12 +162,17 @@ namespace TextRPG
                         break;
                     default:
                         SetCursor_down(0);
-                        Console.WriteLine("잘못된 입력입니다.");
+                        Console.WriteLine("잘못된 입력입니다.                        ");
                         break;
                 }
             } while (path == null);
         }
-
+        public static void PlayerState(Player player)
+        {
+            Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1);
+            Console.WriteLine($"이름: {player.Name}\n| 레벨: {player.Level}\n| 직업: {player.Job}\n| 공격력: {player.AttackPower+player.EquipAttackPower}+({player.EquipAttackPower})" +
+                              $"\n| 방어력: {player.Defense + player.EquipDefense}+({player.EquipDefense})\n| 체력: {player.Health}\n| 골드: {player.Gold}");
+        }
         public static void Inventory(Player player,ItemManager item)//인벤토리에서 보유중인 아이템 출력
         {
             int height = 0;
@@ -210,16 +184,16 @@ namespace TextRPG
                 {
                     have = true;
                     Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
-                    height += 2;
+                    height += 1;
                     if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot && player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum==itemNum)
                     {
-                        Console.Write(" [E]");
+                        Console.Write($"[E]{height}.");
                     }
                     else
-                    {
-                        Console.Write("    ");
+                    {                   
+                        Console.Write($"   {height}. ");
                     }
-                        item.items[itemNum].DisplayInfo();
+                        item.items[itemNum].DisplayInfoInventory();
                 }
                 itemNum++;
             }
@@ -227,21 +201,154 @@ namespace TextRPG
             {
                 SetCursorAndWrite_up(0,"보유한 아이템이 없습니다.");
             }
+            else
+            {
+                SetCursorAndWrite_up(22, "1.장착관리");
+                SetCursorAndWrite_up(23, "0.나가기");
+            }
+        }
+        public static int Equipmentprocedures(Player player)
+        {
+
+            SetCursorAndWrite_up(22, "장착화면입니다 착용하고싶은 장비 번호를 입력해주세요,");
+            SetCursorAndWrite_up(23, "착용중인 장비를 입력하면 해제됩니다.");
+            SetCursor_down(1);
+            string input = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("입력이 비어있습니다. 다시 시도해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else if (!int.TryParse(input, out int userInput))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else
+                {
+                    return userInput;
+                }
+                SetCursor_down(1);
+                input = Console.ReadLine();
+            }
         }
         public static void Merchant(Player player,Merchant merchant,ItemManager item)
         {
-            int height = 0;
+            int height = 1;
             int itemlist=0;
-           
-            merchant.ListOfSellItemNum(player);
+            
             foreach (int itemNum in merchant.SellItemNum)
             {
-                Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
+                SetCursorAndWrite_up(2, $"소지금 : {player.Gold}Gold");
+                Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 3 + height);
                 itemlist++;
                 Console.Write($"{itemlist}.");
-                item.items[itemNum].DisplayInfo();
+                item.items[itemNum].DisplayInfoMerchant(player);
                 height += 2;
             }
+            SetCursorAndWrite_up(15, "0.나가기");
+
+        }
+
+        public static int OpenMerchnat()
+        {
+
+            SetCursor_down(0);
+            Console.WriteLine("구매할 아이템 번호을 적어주세요.");
+            SetCursor_down(1);
+            string input = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("입력이 비어있습니다. 다시 시도해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else if (!int.TryParse(input, out int userInput))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else if (userInput == 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    return userInput;
+                }
+                SetCursor_down(1);
+                input = Console.ReadLine();
+            }
+        }
+        public static void EmptyMerchant()
+        {
+            SetCursorAndWrite_up(1, "구입할수 있는 아이템이 없습니다.");
+        }
+        public static void Transaction(Player player, Merchant merchant, int sellItemNum)
+        {
+
+            if (sellItemNum >= 1 && sellItemNum <= merchant.SellItemNum.Count)
+            {
+                if (!player.PlayerAcquire[merchant.SellItemNum[sellItemNum - 1]])
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine($"{sellItemNum}번 아이템 구매                           ");
+                }
+                else
+                {
+                    Console.WriteLine($"이미 구매한 아이템입니다.                           ");
+                }
+            }
+            else
+            {
+                SetCursor_down(0);
+                Console.WriteLine("잘못된입력                           ");
+                SetCursor_down(1);
+                Console.WriteLine("                           ");
+            }
+
+        }
+       
+        public static int Rest(Player player)
+        {
+            SetCursorAndWrite_up(1, $"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {player.Gold}G)");
+            SetCursorAndWrite_up(4, " 1.휴식하기");
+            SetCursorAndWrite_up(5, " 0. 나가기");
+            SetCursor_down(1);
+            do
+            {
+                SetCursor_down(1);
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    return 1;
+                }
+                else if (input == "0")
+                {
+                    return 0;
+                }
+
+                else
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("잘못된입력                ");
+                }
+            } while (true);            
+        }
+        public static void NoMoney(Player player)
+        {
+            Console.WriteLine($"돈이없다..보유금액 : {player.Gold} Gold");
 
         }
 
@@ -266,7 +373,33 @@ namespace TextRPG
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowHeight - 5+down);
         }
-
-       
+        public static int HelpInput()
+        {
+            SetCursor_down(1);
+            string input = Console.ReadLine();
+            while (true)
+            {
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("입력이 비어있습니다. 다시 시도해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else if (!int.TryParse(input, out int userInput))
+                {
+                    SetCursor_down(0);
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
+                    SetCursor_down(1);
+                    Console.WriteLine("                           ");
+                }
+                else
+                {
+                    return userInput;
+                }
+                SetCursor_down(1);
+                input = Console.ReadLine();
+            }
+        }
     }
 }

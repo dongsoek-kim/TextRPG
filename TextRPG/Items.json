@@ -1,4 +1,4 @@
-[ //착용부위 : head , body , arm , leg , foot
+[ //착용부위 : head , body , arm , leg , foot,weapon
     {
         "ItemNumber": 0,
         "Type": "Armor",
@@ -11,7 +11,7 @@
     {
         "ItemNumber": 1,
         "Type": "Weapon",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "스파르타의 창",
         "Description": "스파르타의 전사들이 사용했다는 전설의 창입니다.",
         "AttackPower": 7
@@ -35,7 +35,7 @@
     {
         "ItemNumber": 4,
         "Type": "Armor",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "판금갑옷",
         "Description": "기사들이 입는 갑옷 무겁다.",
         "EquipSlot": "body",
@@ -62,7 +62,7 @@
     {
         "ItemNumber": 7,
         "Type": "Armor",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "판금헬멧",
         "Description": "갑옷과 세트,세트로입으면 두배로 무겁다.",
         "EquipSlot": "head",
@@ -89,7 +89,7 @@
     {
         "ItemNumber": 10,
         "Type": "Armor",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "강철 브레이슬렛",
         "Description": "갑옷과 세트,세트로입으면 세배로 무겁다.",
         "EquipSlot": "arm",
@@ -100,7 +100,7 @@
         "Type": "Armor",
         "Grade": "Unique",
         "Name": "마력의 팔찌",
-        "Description": "마력이없는 세계에서 마력을 띄우는 팔찌,차고있으면 방어력이올라간다.",
+        "Description": "마력이없는 세계에서 마력을 띄우는 팔찌.",
         "EquipSlot": "arm",
         "Defense": 11
     },
@@ -116,7 +116,7 @@
     {
         "ItemNumber": 13,
         "Type": "Armor",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "판금각반",
         "Description": "갑옷과 세트,세트로입으면 네배로 무겁다.",
         "EquipSlot": "leg",
@@ -143,7 +143,7 @@
     {
         "ItemNumber": 16,
         "Type": "Armor",
-        "Grade": "rare",
+        "Grade": "Rare",
         "Name": "판금신발",
         "Description": "갑옷과 세트,세트로입으면 다섯배로 무겁다.",
         "EquipSlot": "foot",

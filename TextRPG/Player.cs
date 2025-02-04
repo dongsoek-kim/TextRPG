@@ -8,14 +8,18 @@ namespace TextRPG
 {
     internal class Player
     {
-        string Name;
+        public string Name;
         public int Level { get; set; }
-        string Job { get; set; }
-        float AttackPower { get; set; }
-        float Defense { get; set; }
-        float Health { get; set; }
-        int Gold { get; set; }
+        public string Job { get; set; }
+        public float AttackPower { get; set; }
+        public float Defense { get; set; }
+        public float Health { get; set; }
+        public int Gold { get; set; }
+        public int EquipAttackPower { get; set; }
+        public int EquipDefense { get; set; }
         public bool[] PlayerAcquire { get; set; } = new bool[20];
+        public int Exp {  get; set; }
+        public int CurrentExp {  get; set; }
         public struct EquipInfo
         {
             public bool PlayerEquipSlot { get; set; } = false;
@@ -31,45 +35,19 @@ namespace TextRPG
             AttackPower = 10;
             Defense = 5;
             Health = 100f;
-            Gold = 1000;
+            Gold = 10000;
+            EquipAttackPower = 0;
+            EquipDefense = 0;
+            Exp = 0;
+            CurrentExp = 0;
         }
-        public void ShowPlayer(float equipmentAttakPower, float equipmentDefense)
+        public void InitializeEquipInfo()
         {
-            Player_state(equipmentAttakPower, equipmentDefense);
-            Console.WriteLine($"이름: {Name}\n레벨: {Level}\n직업: {Job}\n공격력: {AttackPower}\n방어력: {Defense}\n체력: {Health}\n골드: {Gold}");
-        }
-        
-        public void Acquire(int itemNum)
-        {
-            PlayerAcquire[itemNum] = true;
-        }
-        public void Equip(int itemNum,ItemManager item)
-        { 
-            int equipSlot = item.items[itemNum].EquipSlot;
-            equipInfo[equipSlot].PlayerEquipItemNum=itemNum;
-            equipInfo[equipSlot].PlayerEquipSlot = true;
-            item.items[itemNum].Equip = true;
-            
-        }
-        public void Unequip(int itemNum, ItemManager item)
-        {
-            int equipSlot = item.items[itemNum].EquipSlot;
-            equipInfo[equipSlot].PlayerEquipSlot = false;
-            equipInfo[equipSlot].PlayerEquipItemNum = -1;
-            item.items[itemNum].Equip = false;
-        }
-        public void Player_state(float equipmentAttakPower,float equipmentDefense)
-        {
-            AttackPower = 10f + equipmentAttakPower + (0.5f * (Level-1));
-            Defense = 5f + equipmentDefense + (1f * (Level - 1));
-        }
-
-        public void EquipmentReplacement(int itemNum,int equipSlot,ItemManager item)
-        {
-            int prevEquip = equipInfo[equipSlot].PlayerEquipItemNum;
-            Unequip(prevEquip,item);
-            Equip(itemNum,item);
-            equipInfo[equipSlot].PlayerEquipItemNum = itemNum;
+            for (int i = 0; i < equipInfo.Length; i++)
+            {
+                equipInfo[i] = new EquipInfo { PlayerEquipSlot = false, PlayerEquipItemNum = -1 };
+            }
         }
     }
+       
 }
