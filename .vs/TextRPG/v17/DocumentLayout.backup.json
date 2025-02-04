@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{FC1E3545-70B3-4D1B-A604-7DA520A9E820}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{FC1E3545-70B3-4D1B-A604-7DA520A9E820}|TextRPG\\TextRPG.csproj|c:\\users\\kdseh\\desktop\\spartan\\sec_week\\1\\textrpg\\textrpg\\merchant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC1E3545-70B3-4D1B-A604-7DA520A9E820}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\merchant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{FC1E3545-70B3-4D1B-A604-7DA520A9E820}|TextRPG\\TextRPG.csproj|c:\\users\\kdseh\\desktop\\spartan\\sec_week\\1\\textrpg\\textrpg\\items.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{FC1E3545-70B3-4D1B-A604-7DA520A9E820}|TextRPG\\TextRPG.csproj|solutionrelative:textrpg\\items.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -34,13 +38,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Player.cs",
               "RelativeDocumentMoniker": "TextRPG\\Player.cs",
               "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Player.cs",
               "RelativeToolTip": "TextRPG\\Player.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAswDQAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T07:35:08.03Z",
               "IsPinned": true,
@@ -48,13 +52,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Item.cs",
               "DocumentMoniker": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Item.cs",
               "RelativeDocumentMoniker": "TextRPG\\Item.cs",
               "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Item.cs",
               "RelativeToolTip": "TextRPG\\Item.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAmwFIAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAIsAAAAAAAAAAAAmwKcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T05:34:45.973Z",
               "IsPinned": true,
@@ -66,9 +70,9 @@
               "Title": "Draw.cs",
               "DocumentMoniker": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Draw.cs",
               "RelativeDocumentMoniker": "TextRPG\\Draw.cs",
-              "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Draw.cs",
-              "RelativeToolTip": "TextRPG\\Draw.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAIwCsAAAA1AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Draw.cs*",
+              "RelativeToolTip": "TextRPG\\Draw.cs*",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAcwOMAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T07:27:26.934Z",
               "IsPinned": true,
@@ -82,22 +86,35 @@
               "RelativeDocumentMoniker": "TextRPG\\Gamemanager.cs",
               "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Gamemanager.cs",
               "RelativeToolTip": "TextRPG\\Gamemanager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAADgvywAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T05:36:23.58Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Items.json",
               "DocumentMoniker": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Items.json",
               "RelativeDocumentMoniker": "TextRPG\\Items.json",
               "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Items.json",
               "RelativeToolTip": "TextRPG\\Items.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAALAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAALAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-01-31T08:54:35.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Merchant.cs",
+              "DocumentMoniker": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Merchant.cs",
+              "RelativeDocumentMoniker": "TextRPG\\Merchant.cs",
+              "ToolTip": "C:\\Users\\kdseh\\Desktop\\Spartan\\Sec_Week\\1\\TextRPG\\TextRPG\\Merchant.cs",
+              "RelativeToolTip": "TextRPG\\Merchant.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAApwAsAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-03T11:49:09.706Z",
               "EditorCaption": ""
             }
           ]

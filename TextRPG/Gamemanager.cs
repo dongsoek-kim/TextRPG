@@ -22,6 +22,7 @@ namespace TextRPG
             item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
             Player player = new Player(name, job);//플레이어 생성
+            Merchant merchant= new Merchant();
             while (true)
             {
                 MainScene(out path, player);
@@ -37,6 +38,13 @@ namespace TextRPG
                 {
                     Draw.DrawFrame();
                     Draw.Inventory(player,item);
+                    Console.ReadKey();
+                }
+                else if(path==3)
+                {
+                    Draw.DrawFrame();      
+                    Draw.Merchant(player, merchant, item);
+                    Console.ReadKey();
                 }
                 else if (path == 4)
                 {

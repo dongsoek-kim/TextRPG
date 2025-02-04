@@ -203,10 +203,12 @@ namespace TextRPG
         {
             int height = 0;
             int itemNum = 0;
+            bool have = false;
             foreach (bool plyaerAcquire in player.PlayerAcquire)
             {
                 if (plyaerAcquire)
                 {
+                    have = true;
                     Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
                     height += 2;
                     if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot && player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum==itemNum)
@@ -221,12 +223,31 @@ namespace TextRPG
                 }
                 itemNum++;
             }
-            Console.ReadKey();
+            if (!have)
+            {
+                SetCursorAndWrite_up(0,"보유한 아이템이 없습니다.");
+            }
+        }
+        public static void Merchant(Player player,Merchant merchant,ItemManager item)
+        {
+            int height = 0;
+            int itemlist=0;
+           
+            merchant.ListOfSellItemNum(player);
+            foreach (int itemNum in merchant.SellItemNum)
+            {
+                Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height);
+                itemlist++;
+                Console.Write($"{itemlist}.");
+                item.items[itemNum].DisplayInfo();
+                height += 2;
+            }
+
         }
 
         public static void SetCursorAndWrite_up(int top, string text)//상하만
         {
-            Console.SetCursorPosition(Console.WindowLeft + 1, Console.WindowTop + top);
+            Console.SetCursorPosition(Console.WindowLeft + 1, Console.WindowTop+1 + top);
             Console.Write(text);
             // 한글 문자도 제대로 처리하기 위해 바이트 길이 계산
             int textByteLength = System.Text.Encoding.Default.GetByteCount(text);

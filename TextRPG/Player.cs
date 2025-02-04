@@ -9,7 +9,7 @@ namespace TextRPG
     internal class Player
     {
         string Name;
-        int Level { get; set; }
+        public int Level { get; set; }
         string Job { get; set; }
         float AttackPower { get; set; }
         float Defense { get; set; }
@@ -44,11 +44,12 @@ namespace TextRPG
             PlayerAcquire[itemNum] = true;
         }
         public void Equip(int itemNum,ItemManager item)
-        {
+        { 
             int equipSlot = item.items[itemNum].EquipSlot;
             equipInfo[equipSlot].PlayerEquipItemNum=itemNum;
             equipInfo[equipSlot].PlayerEquipSlot = true;
             item.items[itemNum].Equip = true;
+            
         }
         public void Unequip(int itemNum, ItemManager item)
         {
