@@ -59,8 +59,7 @@
               "ViewState": "AgIAAIEAAAAAAAAAAAA1wG8AAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T02:43:37.829Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -73,8 +72,7 @@
               "ViewState": "AgIAAA4AAAAAAAAAAAApwBUAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T10:20:22.419Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -99,8 +97,7 @@
               "RelativeToolTip": "TextRPG\\Rest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T11:27:16.082Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T11:27:16.082Z"
             },
             {
               "$type": "Document",
@@ -112,8 +109,7 @@
               "RelativeToolTip": "TextRPG\\Gamemanager.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAAwHcAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T05:36:23.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T05:36:23.58Z"
             },
             {
               "$type": "Document",
@@ -125,8 +121,7 @@
               "RelativeToolTip": "TextRPG\\Draw.cs",
               "ViewState": "AgIAABEAAAAAAAAAAADwv40AAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T09:11:56.978Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T09:11:56.978Z"
             },
             {
               "$type": "Document",
@@ -138,8 +133,7 @@
               "RelativeToolTip": "TextRPG\\Inventory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T01:21:58.781Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T01:21:58.781Z"
             },
             {
               "$type": "Document",
@@ -151,8 +145,7 @@
               "RelativeToolTip": "TextRPG\\merchant.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGsAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T01:19:29.816Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T01:19:29.816Z"
             },
             {
               "$type": "Document",
@@ -164,8 +157,7 @@
               "RelativeToolTip": "TextRPG\\Items.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-31T08:54:35.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T08:54:35.264Z"
             }
           ]
         }
