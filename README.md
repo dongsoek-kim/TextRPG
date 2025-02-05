@@ -7,6 +7,7 @@ MVC모델링을 참고한 프로그램입니다.
 Viewer = Draw.cs
 Controll = Gamemanager.cs
 Model = 나머지
+
  ---------
 ver 1.0.0
 
