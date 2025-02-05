@@ -31,7 +31,8 @@ namespace TextRPG
         }
 
         public abstract void DisplayInfoInventory(); // 인벤토리에서 아이템 출력
-        public abstract void DisplayInfoMerchant(Player player); // 상점에서 아이템 출력
+        public abstract void DisplayInfoPurchase();//상점 판매에서 아이템 출력
+        public abstract void DisplayInfoMerchant(Player player); // 상점 구입에서 아이템 출력
     }
 
     // 방어구 클래스
@@ -39,8 +40,8 @@ namespace TextRPG
     {
         public int Defense { get; set; } // 방어력
 
-        public Armor(int itemNumber, string grade, string name, string description, string equipSlot, int defense,int price)
-            : base(itemNumber, grade, name, description,price)
+        public Armor(int itemNumber, string grade, string name, string description, string equipSlot, int defense, int price)
+            : base(itemNumber, grade, name, description, price)
         {
             switch (equipSlot)
             {
@@ -78,7 +79,7 @@ namespace TextRPG
 
         public override void DisplayInfoInventory()
         {
-            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 방어력: {Defense} | 설명: {Description},  {ItemNumber},  {EquipSlot}");
+            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 방어력: {Defense} | 설명: {Description}");
         }
         public override void DisplayInfoMerchant(Player player)
         {
@@ -92,8 +93,11 @@ namespace TextRPG
                 Console.WriteLine();
             }
         }
+        public override void DisplayInfoPurchase()
+        {
+            Console.WriteLine($"이름: {Name} | 판매가격:{(int)Price * 0.85f} | 방어력: {Defense} | 설명: {Description}");
+        }
     }
-
     // 무기 클래스
     internal class Weapon : Item
     {
@@ -109,7 +113,7 @@ namespace TextRPG
 
         public override void DisplayInfoInventory()
         {
-            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 공격력: {AttackPower} | 설명: {Description}  {ItemNumber},  {EquipSlot}");
+            Console.WriteLine($"이름: {Name} | 등급: {Grade} | 공격력: {AttackPower} | 설명: {Description}");
         }
         public override void DisplayInfoMerchant(Player player)
         {
@@ -122,6 +126,10 @@ namespace TextRPG
             {
                 Console.WriteLine();
             }
+        }
+        public override void DisplayInfoPurchase()
+        {
+            Console.WriteLine($"이름: {Name} | 판매가격:{(int)Price * 0.85f} | 공격력: {AttackPower} | 설명: {Description}");
         }
 
     }

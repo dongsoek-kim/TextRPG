@@ -17,6 +17,7 @@ namespace TextRPG
         {
             player.PlayerAcquire[itemNum] = true;
         }
+
         public void Equip(Player player, ItemManager item,int itemNum)
         {
             int equipSlot = item.items[itemNum].EquipSlot;
@@ -64,24 +65,21 @@ namespace TextRPG
             }
             else
             {   listnum--;
-                int itemNUM = OwnItem[listnum];
+                int itemNum = OwnItem[listnum];
                 Console.WriteLine(item.items[OwnItem[listnum]].Name);
-                if (itemNUM == player.equipInfo[item.items[itemNUM].EquipSlot].PlayerEquipItemNum)//장비하고있다면 해제
+                if (itemNum == player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum)//장비하고있다면 해제
                 { 
-                    Console.WriteLine("장비중입니다");
-                  Unequip(player, item, itemNUM);
+                  Unequip(player, item, itemNum);
                 }
-                else if (player.equipInfo[item.items[itemNUM].EquipSlot].PlayerEquipSlot)//장비슬롯이 비어있지않다면 교체
+                else if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot)//장비슬롯이 비어있지않다면 교체
                 { 
-                    Console.WriteLine("슬롯에 다른아이템이 있습니다.");
-                    EquipmentReplacement(itemNUM, item.items[itemNUM].EquipSlot, item, player);
+                    EquipmentReplacement(itemNum, item.items[itemNum].EquipSlot, item, player);
                 }
                 else//둘다 아니라면 장비
                 {
-                    Console.WriteLine("비어있습니다.");
-                    Equip(player, item, itemNUM);
-                    player.equipInfo[item.items[itemNUM].EquipSlot].PlayerEquipSlot = true;
-                    player.equipInfo[item.items[itemNUM].EquipSlot].PlayerEquipItemNum = itemNUM;
+                    Equip(player, item, itemNum);
+                    player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot = true;
+                    player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum = itemNum;
                 }
             }
         }

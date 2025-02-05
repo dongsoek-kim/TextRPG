@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,7 +10,6 @@ namespace TextRPG
 {
     internal class Merchant
     {
-        public HashSet<int> SellItemset = new HashSet<int>();//중복을 자동으로 방시하는 HashSet
         public List<int> SellItemNum =new List<int>();
         private int[] CommenItemNum = new int[6] { 0, 2, 6, 9, 12, 15 };
         private int[] RareItemNum = new int[6] { 1, 4, 7, 10, 13, 16 };
@@ -19,9 +19,8 @@ namespace TextRPG
         { 
             Random random = new Random();
             int randomChance = random.Next(1, 101);
-            SellItemset.Clear();
             SellItemNum.Clear();
-            if (player.Level < 5)
+            if (player.Level < 3)
             { 
                 if (randomChance <= 70)
                 {
@@ -46,7 +45,7 @@ namespace TextRPG
                     AddItems(UniqueItemNum, 3);  
                 }
             }
-            else if(player.Level < 10)
+            else if(player.Level < 5)
             {
                 if (randomChance <= 70)
                 {
@@ -88,7 +87,6 @@ namespace TextRPG
                 }
             }
             RemoveAcquiredItems(player);//플레이어가 소유한 아이템 목록에서 제거
-            SellItemNum = new List<int>(SellItemset);//리스트에 삽입
         }
 
         private void AddItems(int[] itemArray, int count)// 배열에서 랜덤으로 아이템 번호를 선택
@@ -96,22 +94,36 @@ namespace TextRPG
             Random random = new Random();
             for (int i = 0; i < count; i++)
             {
-                int randomIndex = random.Next(itemArray.Length); 
-                int itemNumber = itemArray[randomIndex];  
-                SellItemset.Add(itemNumber);
+                int randomIndex = random.Next(itemArray.Length);
+                if (!SellItemNum.Contains(itemArray[randomIndex])) // 중복 체크
+                {
+                    SellItemNum.Add(itemArray[randomIndex]);
+                }
             }
+
         }
         public void RemoveAcquiredItems(Player player)
         {
-            // 리스트에서 아이템을 순회하며, Acquire가 true인 경우 해당 아이템을 제거
-            foreach (var item in SellItemNum.ToList()) 
+            for (int i = SellItemNum.Count - 1; i >= 0; i--)
             {
-                if (player.PlayerAcquire[item])  
+                if (player.PlayerAcquire[SellItemNum[i]])  // 해당 아이템이 획득되었으면
                 {
-                    SellItemNum.Remove(item);  
+                    SellItemNum.RemoveAt(i);  // 해당 인덱스의 아이템을 제거
                 }
             }
+
         }
+        public void Purchase(Player player,Inventory inventory,ItemManager item, int itemNum)
+        {
+            if (itemNum == player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum)//장착중이라면
+            {
+                inventory.Unequip(player, item, itemNum);
+            }
+            player.PlayerAcquire[itemNum] = false;
+            player.Gold += (int)(item.items[itemNum].Price * 0.85f);
+
+        }
+
         public void transaction(Player player, int sellItemNum,int price)
         {
 

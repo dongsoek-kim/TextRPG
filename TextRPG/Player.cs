@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,10 @@ namespace TextRPG
         public int EquipAttackPower { get; set; }
         public int EquipDefense { get; set; }
         public bool[] PlayerAcquire { get; set; } = new bool[20];
-        public int Exp {  get; set; }
-        public int CurrentExp {  get; set; }
+        public int RequiredExp { get; set; }
+        public int CurrentExp { get; set; }
+
+
         public struct EquipInfo
         {
             public bool PlayerEquipSlot { get; set; } = false;
@@ -38,7 +41,7 @@ namespace TextRPG
             Gold = 10000;
             EquipAttackPower = 0;
             EquipDefense = 0;
-            Exp = 0;
+            RequiredExp = 1;
             CurrentExp = 0;
         }
         public void InitializeEquipInfo()
@@ -47,6 +50,43 @@ namespace TextRPG
             {
                 equipInfo[i] = new EquipInfo { PlayerEquipSlot = false, PlayerEquipItemNum = -1 };
             }
+        }
+        public string GetExp(int getExp)
+        {
+            CurrentExp += getExp;
+            if (CurrentExp >= RequiredExp)
+            {
+                Level += 1;
+                CurrentExp = 0;
+                RequiredExp = 1 + (Level * (2 - 1));
+                AttackPower += 0.5f;
+                Defense += 1;
+                return "LevelUP";
+            }
+            else 
+            {
+                return "Clear";
+            }
+        }
+        public void GetGold(int getgold)
+        {
+            Gold += getgold;
+        }
+        public void Death()
+        {
+
+        }
+        public int HaveItemNumber()
+        {
+            int haveItemNumber=0; 
+            foreach(bool playerAcquire in PlayerAcquire)
+            {
+                if (playerAcquire)
+                {
+                    haveItemNumber++;
+                }
+            }
+            return haveItemNumber;
         }
     }
        

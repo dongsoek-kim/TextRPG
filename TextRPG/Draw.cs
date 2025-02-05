@@ -160,6 +160,12 @@ namespace TextRPG
                     case "4":
                         path = 4;
                         break;
+                    case "5":
+                        path = 5;
+                        break;
+                    case "6":
+                        path = 6;
+                        break;
                     default:
                         SetCursor_down(0);
                         Console.WriteLine("잘못된 입력입니다.                        ");
@@ -256,44 +262,69 @@ namespace TextRPG
 
         }
 
-        public static int OpenMerchnat()
+        public static void OpenMerchnat()
         {
 
             SetCursor_down(0);
             Console.WriteLine("구매할 아이템 번호을 적어주세요.");
             SetCursor_down(1);
-            string input = Console.ReadLine();
-            while (true)
-            {
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    SetCursor_down(0);
-                    Console.WriteLine("입력이 비어있습니다. 다시 시도해주세요.");
-                    SetCursor_down(1);
-                    Console.WriteLine("                           ");
-                }
-                else if (!int.TryParse(input, out int userInput))
-                {
-                    SetCursor_down(0);
-                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
-                    SetCursor_down(1);
-                    Console.WriteLine("                           ");
-                }
-                else if (userInput == 0)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return userInput;
-                }
-                SetCursor_down(1);
-                input = Console.ReadLine();
-            }
         }
         public static void EmptyMerchant()
         {
             SetCursorAndWrite_up(1, "구입할수 있는 아이템이 없습니다.");
+            SetCursor_down(0);
+            Console.WriteLine("2. 판매");
+            SetCursor_down(1);
+            Console.WriteLine("0. 나가기");
+        }
+        public static void MerchantSelect()
+        {
+            SetCursor_down(-2);
+            Console.WriteLine("1. 구매");
+            SetCursor_down(-1);
+            Console.WriteLine("2. 판매");
+            SetCursor_down(0);
+            Console.WriteLine("0. 나가기");
+        }
+        public static void purchase(Player player, ItemManager item)
+        {
+            int height = 0;
+            int itemNum = 0;
+            bool have = false;
+            foreach (bool plyaerAcquire in player.PlayerAcquire)
+            {
+                if (plyaerAcquire)
+                {
+                    have = true;
+                    Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowTop + 1 + height+3);
+                    height += 1;
+                    if (player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipSlot && player.equipInfo[item.items[itemNum].EquipSlot].PlayerEquipItemNum == itemNum)
+                    {
+                        Console.Write($"[E]{height}.");
+                    }
+                    else
+                    {
+                        Console.Write($"   {height}. ");
+                    }
+                    item.items[itemNum].DisplayInfoPurchase();
+                }
+                itemNum++;
+            }
+            if (!have)
+            {
+                SetCursorAndWrite_up(1, "보유한 아이템이 없습니다.");
+                SetCursor_down(0);
+                Console.WriteLine("0. 나가기                   ");
+            }
+            else 
+            {
+                SetCursor_down(-1);
+                Console.WriteLine("판매할 아이템 번호을 적어주세요.");
+                SetCursor_down(0);
+                Console.WriteLine("0. 나가기                   ");
+            }
+
+
         }
         public static void Transaction(Player player, Merchant merchant, int sellItemNum)
         {
@@ -318,6 +349,83 @@ namespace TextRPG
                 Console.WriteLine("                           ");
             }
 
+        }
+        public static void EnterDungeon()
+        {
+            SetCursorAndWrite_up(1, "던전입장");
+            SetCursorAndWrite_up(2, "이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
+            SetCursorAndWrite_up(5, "1. 쉬운 던전     | 방어력 5 이상 권장");
+            SetCursorAndWrite_up(6, "2. 일반 던전     | 방어력 11 이상 권장\r\n");
+            SetCursorAndWrite_up(7, "3. 어려운 던전    | 방어력 17 이상 권장\r\n");
+            SetCursorAndWrite_up(10, "0.나가기");
+        }
+        public static void InDungeon(Player player,Dungeon dungeon,string dungeonResult,int input)
+        {
+            switch (dungeonResult)
+            {
+                case "Death":
+                    {
+                        SetCursorAndWrite_up(1, "플레이어사망!");
+                        break;                        
+                    }
+                case "Defeat":
+                    {
+                        SetCursorAndWrite_up(1, "패배!");
+                        SetCursorAndWrite_up(2, "당신은 패배하였습니다.");
+                        SetCursorAndWrite_up(3, "[탐험결과]");
+                        SetCursorAndWrite_up(5, $"체력{player.Health+50}->{player.Health}");
+                        break;
+                    }
+                case "LevelUP":
+                    {
+                        if (input == 1)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 쉬운 던전을 클리어 하였습니다!");
+                        }
+                        if (input == 2)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 일반 던전을 클리어 하였습니다!");
+                        }
+                        if (input == 3)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 어려운 던전을 클리어 하였습니다!");
+                        }
+                        SetCursorAndWrite_up(3, "[탐험결과]");
+                        SetCursorAndWrite_up(4, $"레벨업! Level :{player.Level - 1}->{player.Level}");
+                        SetCursorAndWrite_up(5, $"체력{player.Health + dungeon.LoseHealth}->{player.Health}");
+                        SetCursorAndWrite_up(6, $"Gold{player.Gold - dungeon.gold}->{player.Gold}");
+                        break; 
+                    }
+                case "Clear":
+                    {
+                        if (input == 1)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 쉬운 던전을 클리어 하였습니다!");
+                        }
+                        if (input == 2)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 일반 던전을 클리어 하였습니다!");
+                        }
+                        if (input == 3)
+                        {
+                            SetCursorAndWrite_up(1, "축하합니다!");
+                            SetCursorAndWrite_up(2, "당신은 어려운 던전을 클리어 하였습니다!");
+                        }
+                        SetCursorAndWrite_up(5, $"체력{player.Health + dungeon.LoseHealth}->{player.Health}");
+                        SetCursorAndWrite_up(6, $"Gold{player.Gold - dungeon.gold}->{player.Gold}");
+                        break; 
+                    }
+                default:
+                    {
+                        SetCursorAndWrite_up(5, "오류");
+                        break;
+                    }
+            }            
         }
        
         public static int Rest(Player player)
@@ -372,6 +480,17 @@ namespace TextRPG
         public static void SetCursor_down(int down)//아랫단
         {
             Console.SetCursorPosition(Console.WindowLeft + 2, Console.WindowHeight - 5+down);
+        }
+        public static void DownFrameClear()
+        {
+            SetCursor_down(0);
+            Console.WriteLine("                                     ");
+            SetCursor_down(1);
+            Console.WriteLine("                                     ");
+            SetCursor_down(2);
+            Console.WriteLine("                                     ");
+            SetCursor_down(3);
+            Console.WriteLine("                                     ");
         }
         public static int HelpInput()
         {

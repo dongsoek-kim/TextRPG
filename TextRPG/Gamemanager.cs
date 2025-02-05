@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using Newtonsoft.Json.Linq;
+using System.ComponentModel.Design;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Xml.Linq;
@@ -22,11 +24,11 @@ namespace TextRPG
             item.ItemLoad();//아이템 로드
             Draw.GameStart(out name, out job);
             Player player = new Player(name, job);//플레이어 생성
-            
-            player.InitializeEquipInfo(); 
+            player.InitializeEquipInfo();
             Merchant merchant= new Merchant();
             merchant.MakeListOfSellItemNum(player);
-            Inventory inventory = new Inventory(); 
+            Inventory inventory = new Inventory();
+            Dungeon dungeon = new Dungeon();   
             while (true)
             {
                 MainScene(out path, player);
@@ -47,7 +49,6 @@ namespace TextRPG
                     Draw.SetCursor_down(1);
                     do
                     {
-                        inventory.MakeOwnList(player);
                         if (inventory.OwnItem.Count == 0)
                         {
                             break;
@@ -59,7 +60,7 @@ namespace TextRPG
                                 {
                                     Draw.DrawFrame();
                                     Draw.Inventory(player, item);
-                                    inventory.MakeOwnList(player);
+                                    
                                     inputNum = Draw.Equipmentprocedures(player);
                                     inventory.Equipmentprocedures(player, item, inputNum);
                                 } while (inputNum != 0);
@@ -76,50 +77,172 @@ namespace TextRPG
                 }
                 else if (path == 3)
                 {
-                    int sellItemNum;
+                    int input;
                     int itemNum;
+
+                    Draw.DrawFrame();
+                    Draw.Merchant(player, merchant, item);
+                    if (merchant.SellItemNum.Count == 0)
+                    {
+                        do
+                        {
+                            Draw.DrawFrame();
+                            Draw.EmptyMerchant();
+                            input = Draw.HelpInput();
+                            if (input == 0)
+                            {
+                                break;
+                            }
+                            else if (input == 2)
+                            {
+                                Draw.purchase(player, item);
+                            }
+                            else
+                            {
+                                Draw.SetCursor_down(0);
+                                Console.WriteLine("잘못된 값 입력                            ");
+                                Draw.SetCursor_down(1);
+                                Console.WriteLine("                                          ");
+                            }
+                        } while (true);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            Draw.DrawFrame();
+                            Draw.Merchant(player, merchant, item);
+                            Draw.MerchantSelect();
+                            input = Draw.HelpInput();
+                            if (input == 0)
+                            {
+                                break;
+                            }
+                            else if (input == 1)
+                            {
+                                do
+                                {
+                                    Draw.DrawFrame();
+                                    Draw.SetCursorAndWrite_up(1, "구입화면입니다");
+                                    Draw.Merchant(player, merchant, item);
+                                    Draw.SetCursor_down(0);
+                                    Console.WriteLine("구입하고싶은 아이템 번호를 입력해주세요");
+                                    input = Draw.HelpInput();
+                                    Draw.DownFrameClear();
+                                    if (input == 0)
+                                    {
+                                        break;
+                                    }
+                                    if (input > merchant.SellItemNum.Count())
+                                    {
+                                        Draw.SetCursor_down(0);
+                                        Console.WriteLine("잘못된 값 입력                            ");
+                                        Console.ReadKey();
+                                        continue;
+                                    }
+                                    itemNum = merchant.SellItemNum[input - 1];
+                                    if (player.Gold >= item.items[itemNum].Price)
+                                    {
+                                        Draw.Transaction(player, merchant, input);
+                                        if (!player.PlayerAcquire[merchant.SellItemNum[input - 1]])
+                                        {
+                                            merchant.transaction(player, itemNum, item.items[itemNum].Price);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Draw.SetCursor_down(1);
+                                        Console.WriteLine("Gold 부족");
+                                        Console.ReadKey();
+                                    }
+                                    inventory.MakeOwnList(player);
+                                } while (true);
+                            }
+                            else if (input == 2)
+                            {
+
+                                do
+                                {
+                                    Draw.DrawFrame();
+                                    Draw.SetCursorAndWrite_up(1, "판매화면입니다");
+                                    Draw.purchase(player,item);
+                                    input = Draw.HelpInput();
+                                    Draw.DownFrameClear();
+                                    if (input == 0)
+                                    {
+                                        break;
+                                    }
+                                    if (input < player.HaveItemNumber()+1)
+                                    {
+                                        itemNum = inventory.OwnItem[input - 1];
+                                        merchant.Purchase(player,inventory, item, itemNum);
+                                        inventory.MakeOwnList(player);
+                                    }
+                                    else 
+                                    {
+                                        Draw.SetCursor_down(1);
+                                        Console.WriteLine("잘못된 값 입력                            ");
+                                    }
+                                } while (true);
+                            }
+                        } while (true);
+                    }
+
+                }
+                else if (path == 4)
+                {
+                    int input;
+                    Draw.DrawFrame();
+                    Draw.EnterDungeon();
                     do
                     {
+                        string dungeonResult;
+                        input = Draw.HelpInput();
                         Draw.DrawFrame();
-                        Draw.Merchant(player, merchant, item);
-                        if (merchant.SellItemNum.Count == 0)
+                        if (input == 1)
                         {
-                            Draw.EmptyMerchant();
+                            dungeonResult = dungeon.InDungeon(player, input);
+                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+                            if (dungeonResult == "LevelUP")
+                            {
+                                merchant.MakeListOfSellItemNum(player);
+                            }
+                            Console.ReadKey();
+                            break;
+                        }
+                        else if (input == 2)
+                        {
+                            dungeonResult = dungeon.InDungeon(player, input);
+                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+                            if (dungeonResult == "LevelUP")
+                            {
+                                merchant.MakeListOfSellItemNum(player);
+                            }
+                            Console.ReadKey();
+                            break;
+                        }
+                        else if (input == 3)
+                        {
+                            dungeonResult = dungeon.InDungeon(player, input);
+                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+
+                            if (dungeonResult == "LevelUP")
+                            {
+                                merchant.MakeListOfSellItemNum(player);
+                            }
+                            Console.ReadKey();
+                            break;
+                        }
+                        else if (input == 0)
+                        {
                             break;
                         }
                         else
                         {
-                            sellItemNum = Draw.OpenMerchnat();
-
-                            if (sellItemNum == -1)
-                            {
-                                break;
-                            }
-                            else if (sellItemNum > merchant.SellItemNum.Count())
-                            {
-                                Draw.SetCursor_down(0);
-                                Console.WriteLine("잘못된 값 입력                            ");
-                                Console.ReadKey();
-                                continue;
-                            }
-                            itemNum = merchant.SellItemNum[sellItemNum - 1];
-                            if (player.Gold >= item.items[itemNum].Price)
-                            {
-                                Draw.Transaction(player, merchant, sellItemNum);
-                                merchant.transaction(player, itemNum, item.items[itemNum].Price);
-                            }
-                            else
-                            {
-                                Draw.SetCursor_down(1);
-                                Console.WriteLine("Gold 부족");
-                                Console.ReadKey();
-                            }
+                            Draw.SetCursor_down(1);
+                            Console.WriteLine("잘못된 입력입니다.                    ");
                         }
                     } while (true);
-                }
-                else if (path == 4)
-                {
-
                 }
                 else if (path == 5)
                 {
