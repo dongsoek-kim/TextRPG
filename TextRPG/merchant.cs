@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -129,6 +130,43 @@ namespace TextRPG
 
             player.PlayerAcquire[sellItemNum] = true;
             player.Gold-=price;
+        }
+        public void SaveMerchantData()
+        {
+            string relativePath = @"..\..\..\";
+            string jsonFile = "MerchantData.json";  // JSON 파일명
+            string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
+            try
+            {
+                string json = JsonConvert.SerializeObject(this, Formatting.Indented);  // Merchant 객체를 JSON으로 직렬화
+                File.WriteAllText(jsonPath, json);  // JSON 데이터를 파일로 저장
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        public static Merchant LoadMerchantData()
+        {
+            string relativePath = @"..\..\..\";
+            string jsonFile = "MerchantData.json";  // JSON 파일명
+            string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
+            try
+            {
+                if (File.Exists(jsonPath))
+                {
+                    string json = File.ReadAllText(jsonPath);
+                    Merchant merchant = JsonConvert.DeserializeObject<Merchant>(json);  // JSON 파일을 Merchant 객체로 역직렬화
+                    return merchant;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }

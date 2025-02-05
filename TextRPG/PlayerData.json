@@ -1,14 +1,61 @@
 {
-    "Name": "",
-    "Level": 1,
-    "Job": "",
-    "AttackPower": 10.0,
-    "Defense": 5.0,
-    "Health": 100.0,
-    "Gold": 0,
-    "EquipAttackPower": 0,
-    "EquipDefense": 0,
-    "PlayerAcquire": [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
-    "RequiredExp": 100,
-    "CurrentExp": 0
+  "Name": "",
+  "equipInfo": [
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    },
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    },
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    },
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    },
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    },
+    {
+      "PlayerEquipSlot": false,
+      "PlayerEquipItemNum": -1
+    }
+  ],
+  "Level": 1,
+  "Job": "전사",
+  "AttackPower": 10.0,
+  "Defense": 5.0,
+  "Health": 100.0,
+  "Gold": 6585,
+  "EquipAttackPower": 0,
+  "EquipDefense": 0,
+  "PlayerAcquire": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "RequiredExp": 1,
+  "CurrentExp": 0
 }

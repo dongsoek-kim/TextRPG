@@ -93,42 +93,6 @@ namespace TextRPG
                 job = "도적";
             }
         }//게임시작 대사
-        public static int Is_Equip()
-        {
-            DrawFrame();
-            int input;
-            do
-            {
-                SetCursorAndWrite_up(1, "이미 장착된 부위입니다. 장비를 교체하시겠습니까?");
-                Console.WriteLine();
-                Console.WriteLine();
-                SetCursorAndWrite_up(7, "1.예");
-                Console.WriteLine();
-                SetCursorAndWrite_up(9, "2.아니오");
-                SetCursor_down(1);
-                input = int.TryParse(Console.ReadLine(), out int n) ? n : 0;
-                Console.Clear();
-                DrawFrame();
-
-                if (input != 1 && input != 2)
-                {
-                    SetCursor_down(0);
-                    Console.WriteLine("1 또는 2를 입력하세요");
-                }
-            } while (input != 1 && input != 2);
-            if (input == 1)
-            {
-                SetCursor_down(1);
-                Console.WriteLine("장착된 장비를 벗고 새로운 장비를 장착합니다");
-            }
-            else
-            {
-                SetCursor_down(1);
-                Console.WriteLine("장비를 교체하지 않습니다");
-            }
-            return input;
-
-        }
          public static void MainScene(out int? path)
         {
             DrawFrame();
@@ -140,6 +104,8 @@ namespace TextRPG
             SetCursorAndWrite_up(8, "3.상점");
             SetCursorAndWrite_up(9, "4.던전입장");
             SetCursorAndWrite_up(10,"5.휴식하기");
+            SetCursorAndWrite_up(11, "6.게임종료");
+            SetCursorAndWrite_up(15, "데이터 초기화를 원하시면 DeleteData를 입력해주세요");
             SetCursor_down(0);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             do
@@ -165,6 +131,9 @@ namespace TextRPG
                         break;
                     case "6":
                         path = 6;
+                        break;
+                    case "DeleteData":
+                        path = 99;
                         break;
                     default:
                         SetCursor_down(0);
@@ -366,6 +335,8 @@ namespace TextRPG
                 case "Death":
                     {
                         SetCursorAndWrite_up(1, "플레이어사망!");
+                        SetCursorAndWrite_up(2, "모든 정보가 지워집니다!");
+
                         break;                        
                     }
                 case "Defeat":
