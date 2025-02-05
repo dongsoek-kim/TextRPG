@@ -60,7 +60,7 @@ namespace TextRPG
         {
             if (listnum > OwnItem.Count||listnum<=0)
             {
-                Draw.SetCursor_down(1);
+                IMaiiInterface.SetCursor_down(1);
                 Console.WriteLine("범위에서 벗어났습니다");
             }
             else

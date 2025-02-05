@@ -133,7 +133,7 @@ namespace TextRPG
         }
         public void SaveMerchantData()
         {
-            string relativePath = @"..\..\..\";
+            string relativePath = @"..\..\..\Resources\";
             string jsonFile = "MerchantData.json";  // JSON 파일명
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try
@@ -147,7 +147,7 @@ namespace TextRPG
         }
         public static Merchant LoadMerchantData()
         {
-            string relativePath = @"..\..\..\";
+            string relativePath = @"..\..\..\Resources\";
             string jsonFile = "MerchantData.json";  // JSON 파일명
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try

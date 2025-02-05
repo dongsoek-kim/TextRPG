@@ -94,7 +94,7 @@ namespace TextRPG
         }
         public void SavePlayerData()
         {
-            string relativePath = @"..\..\..\";
+            string relativePath = @"..\..\..\Resources\";
             string jsonFile = "PlayerData.json";  // JSON 파일명
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try
@@ -109,7 +109,7 @@ namespace TextRPG
         }
         public static Player LoadPlayerData()
         {
-            string relativePath = @"..\..\..\";
+            string relativePath = @"..\..\..\Resources\";
             string jsonFile = "PlayerData.json";  // JSON 파일명
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             try

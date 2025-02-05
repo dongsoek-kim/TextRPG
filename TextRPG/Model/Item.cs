@@ -148,7 +148,7 @@ namespace TextRPG
         
         public void ItemLoad()
         {
-            string relativePath = @"..\..\..\";
+            string relativePath = @"..\..\..\Resources\";
             string jsonFile = "items.json";  // JSON 파일명
             string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
             if (File.Exists(jsonPath))

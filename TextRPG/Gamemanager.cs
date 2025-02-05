@@ -19,7 +19,7 @@ namespace TextRPG
             string name;
             string job;
             int? path;
-            Draw.DrawFrame();
+            IMaiiInterface.DrawFrame();
             ItemManager item = new ItemManager();
             item.ItemLoad();//아이템 로드
             Player player;
@@ -27,7 +27,7 @@ namespace TextRPG
 
             if (player.Name == "")//이름이 초기값이라면
             {
-                Draw.GameStart(out name, out job);
+                IMaiiInterface.GameStart(out name, out job);
                 player = new Player(name, job);//플레이어 생성
                 player.InitializeEquipInfo();
             }
@@ -47,18 +47,18 @@ namespace TextRPG
                 if (path == 1)
                 {
 
-                    Draw.DrawFrame();
-                    Draw.Setcuusor_up(1);
-                    Draw.PlayerState(player);
+                    IMaiiInterface.DrawFrame();
+                    IMaiiInterface.Setcuusor_up(1);
+                    IMaiiInterface.PlayerState(player);
                     Console.ReadKey();
                 }
                 else if (path == 2)
                 {
-                    Draw.DrawFrame();
-                    Draw.Inventory(player, item);
+                    IMaiiInterface.DrawFrame();
+                    IInventory.Inventory(player, item);
                     int inputNum;
-                    inputNum = Draw.HelpInput();
-                    Draw.SetCursor_down(1);
+                    inputNum = IInventory.HelpInput();
+                    IMaiiInterface.SetCursor_down(1);
                     do
                     {
                         if (inventory.OwnItem.Count == 0)
@@ -70,19 +70,19 @@ namespace TextRPG
                             case 1://아이템장착관리
                                 do
                                 {
-                                    Draw.DrawFrame();
-                                    Draw.Inventory(player, item);
+                                    IMaiiInterface.DrawFrame();
+                                    IInventory.Inventory(player, item);
                                     
-                                    inputNum = Draw.Equipmentprocedures(player);
+                                    inputNum = IInventory.Equipmentprocedures(player);
                                     inventory.Equipmentprocedures(player, item, inputNum);
                                 } while (inputNum != 0);
                                 break;
                             case 0:
                                 break;
                             default:
-                                Draw.SetCursor_down(0);
+                                IInventory.SetCursor_down(0);
                                 Console.WriteLine("잘못된 값 입력                            ");
-                                inputNum = Draw.HelpInput();
+                                inputNum = IMaiiInterface.HelpInput();
                                 break;
                         }
                     } while (inputNum != 0);
@@ -92,28 +92,28 @@ namespace TextRPG
                     int input;
                     int itemNum;
 
-                    Draw.DrawFrame();
-                    Draw.Merchant(player, merchant, item);
+                    IMaiiInterface.DrawFrame();
+                    IMerchant.Merchant(player, merchant, item);
                     if (merchant.SellItemNum.Count == 0)
                     {
                         do
                         {
-                            Draw.DrawFrame();
-                            Draw.EmptyMerchant();
-                            input = Draw.HelpInput();
+                            IMaiiInterface.DrawFrame();
+                            IMerchant.EmptyMerchant();
+                            input = IMaiiInterface.HelpInput();
                             if (input == 0)
                             {
                                 break;
                             }
                             else if (input == 2)
                             {
-                                Draw.purchase(player, item);
+                                IMerchant.purchase(player, item);
                             }
                             else
                             {
-                                Draw.SetCursor_down(0);
+                                IMaiiInterface.SetCursor_down(0);
                                 Console.WriteLine("잘못된 값 입력                            ");
-                                Draw.SetCursor_down(1);
+                                IMaiiInterface.SetCursor_down(1);
                                 Console.WriteLine("                                          ");
                             }
                         } while (true);
@@ -122,10 +122,10 @@ namespace TextRPG
                     {
                         do
                         {
-                            Draw.DrawFrame();
-                            Draw.Merchant(player, merchant, item);
-                            Draw.MerchantSelect();
-                            input = Draw.HelpInput();
+                            IMaiiInterface.DrawFrame();
+                            IMerchant.Merchant(player, merchant, item);
+                            IMerchant.MerchantSelect();
+                            input = IMerchant.HelpInput();
                             if (input == 0)
                             {
                                 break;
@@ -134,20 +134,20 @@ namespace TextRPG
                             {
                                 do
                                 {
-                                    Draw.DrawFrame();
-                                    Draw.SetCursorAndWrite_up(1, "구입화면입니다");
-                                    Draw.Merchant(player, merchant, item);
-                                    Draw.SetCursor_down(0);
+                                    IMaiiInterface.DrawFrame();
+                                    IMerchant.SetCursorAndWrite_up(1, "구입화면입니다");
+                                    IMerchant.Merchant(player, merchant, item);
+                                    IMerchant.SetCursor_down(0);
                                     Console.WriteLine("구입하고싶은 아이템 번호를 입력해주세요");
-                                    input = Draw.HelpInput();
-                                    Draw.DownFrameClear();
+                                    input = IMerchant.HelpInput();
+                                    IMaiiInterface.DownFrameClear();
                                     if (input == 0)
                                     {
                                         break;
                                     }
                                     if (input > merchant.SellItemNum.Count())
                                     {
-                                        Draw.SetCursor_down(0);
+                                        IMerchant.SetCursor_down(0);
                                         Console.WriteLine("잘못된 값 입력                            ");
                                         Console.ReadKey();
                                         continue;
@@ -155,7 +155,7 @@ namespace TextRPG
                                     itemNum = merchant.SellItemNum[input - 1];
                                     if (player.Gold >= item.items[itemNum].Price)
                                     {
-                                        Draw.Transaction(player, merchant, input);
+                                        IMerchant.Transaction(player, merchant, input);
                                         if (!player.PlayerAcquire[merchant.SellItemNum[input - 1]])
                                         {
                                             merchant.transaction(player, itemNum, item.items[itemNum].Price);
@@ -163,7 +163,7 @@ namespace TextRPG
                                     }
                                     else
                                     {
-                                        Draw.SetCursor_down(1);
+                                        IMerchant.SetCursor_down(1);
                                         Console.WriteLine("Gold 부족");
                                         Console.ReadKey();
                                     }
@@ -175,11 +175,11 @@ namespace TextRPG
 
                                 do
                                 {
-                                    Draw.DrawFrame();
-                                    Draw.SetCursorAndWrite_up(1, "판매화면입니다");
-                                    Draw.purchase(player,item);
-                                    input = Draw.HelpInput();
-                                    Draw.DownFrameClear();
+                                    IMaiiInterface.DrawFrame();
+                                    IMerchant.SetCursorAndWrite_up(1, "판매화면입니다");
+                                    IMerchant.purchase(player,item);
+                                    input = IMerchant.HelpInput();
+                                    IMaiiInterface.DownFrameClear();
                                     if (input == 0)
                                     {
                                         break;
@@ -192,7 +192,7 @@ namespace TextRPG
                                     }
                                     else 
                                     {
-                                        Draw.SetCursor_down(1);
+                                        IMerchant.SetCursor_down(1);
                                         Console.WriteLine("잘못된 값 입력                            ");
                                     }
                                 } while (true);
@@ -204,20 +204,20 @@ namespace TextRPG
                 else if (path == 4)
                 {
                     int input;
-                    Draw.DrawFrame();
-                    Draw.EnterDungeon();
+                    IMaiiInterface.DrawFrame();
+                    IDungeon.EnterDungeon();
                     do
                     {
                         string dungeonResult;
-                        input = Draw.HelpInput();
-                        Draw.DrawFrame();
+                        input = IDungeon.HelpInput();
+                        IMaiiInterface.DrawFrame();
                         if (input == 1)
                         {
                             dungeonResult = dungeon.InDungeon(player, input);
-                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+                            IDungeon.InDungeon(player, dungeon, dungeonResult, input);
                             if (dungeonResult == "Death")
                             {
-                                Draw.SetCursor_down(1);
+                                IDungeon.SetCursor_down(1);
                                 Console.ReadKey();
                                 player.Death();
                             }
@@ -231,11 +231,11 @@ namespace TextRPG
                         else if (input == 2)
                         {
                             dungeonResult = dungeon.InDungeon(player, input);
-         
-                            Draw.InDungeon(player, dungeon, dungeonResult, input); 
+
+                            IDungeon.InDungeon(player, dungeon, dungeonResult, input); 
                             if (dungeonResult == "Death")
                             {
-                                Draw.SetCursor_down(1);
+                                IDungeon.SetCursor_down(1);
                                 Console.ReadKey();
                                 player.Death();
                             }
@@ -249,11 +249,11 @@ namespace TextRPG
                         }
                         else if (input == 3)
                         {
-                            dungeonResult = dungeon.InDungeon(player, input);                
-                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+                            dungeonResult = dungeon.InDungeon(player, input);
+                            IDungeon.InDungeon(player, dungeon, dungeonResult, input);
                             if (dungeonResult == "Death")
                             {
-                                Draw.SetCursor_down(1);
+                                IDungeon.SetCursor_down(1);
                                 Console.ReadKey();
                                 player.Death();
                             }
@@ -270,7 +270,7 @@ namespace TextRPG
                         }
                         else
                         {
-                            Draw.SetCursor_down(1);
+                            IMaiiInterface.SetCursor_down(1);
                             Console.WriteLine("잘못된 입력입니다.                    ");
                         }
                     } while (true);
@@ -279,19 +279,19 @@ namespace TextRPG
                 {
                     if (player.Gold < 500)
                     {
-                        Draw.NoMoney(player);
+                        IMaiiInterface.NoMoney(player);
                         Console.ReadKey();
                     }
                     else
                     {
                         int rest;
-                        Draw.DrawFrame();
-                        rest = Draw.Rest(player);
+                        IMaiiInterface.DrawFrame();
+                        rest = IMaiiInterface.Rest(player);
                         if (rest == 1)
                         {
                             Rest.RestTime(player);
-                            Draw.DrawFrame();
-                            Draw.SetCursorAndWrite_up(1, "체력이 전부 회복되었다");
+                            IMaiiInterface.DrawFrame();
+                            IMaiiInterface.SetCursorAndWrite_up(1, "체력이 전부 회복되었다");
                             Console.ReadKey();
                         }
 
@@ -322,8 +322,8 @@ namespace TextRPG
 
         static void MainScene(out int? paht, Player player)
         {
-            Draw.DrawFrame();
-            Draw.MainScene(out paht);
+            IMaiiInterface.DrawFrame();
+            IMaiiInterface.MainScene(out paht);
         }
     }
 }
