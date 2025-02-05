@@ -22,8 +22,13 @@ namespace TextRPG
             Draw.DrawFrame();
             ItemManager item = new ItemManager();
             item.ItemLoad();//아이템 로드
-            Draw.GameStart(out name, out job);
-            Player player = new Player(name, job);//플레이어 생성
+            Player player;
+            player = Player.LoadPlayerData();  // 플레이어 데이터를 불러옴
+            if (player == null)
+            {
+                Draw.GameStart(out name, out job);
+                player = new Player(name, job);//플레이어 생성
+            }
             player.InitializeEquipInfo();
             Merchant merchant= new Merchant();
             merchant.MakeListOfSellItemNum(player);

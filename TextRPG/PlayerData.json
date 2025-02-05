@@ -1,0 +1,14 @@
+{
+    "Name": "",
+    "Level": 1,
+    "Job": "",
+    "AttackPower": 10.0,
+    "Defense": 5.0,
+    "Health": 100.0,
+    "Gold": 0,
+    "EquipAttackPower": 0,
+    "EquipDefense": 0,
+    "PlayerAcquire": [ false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false ],
+    "RequiredExp": 100,
+    "CurrentExp": 0
+}

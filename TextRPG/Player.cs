@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -87,6 +88,50 @@ namespace TextRPG
                 }
             }
             return haveItemNumber;
+        }
+        public void SavePlayerData()
+        {
+            string relativePath = @"..\..\..\";
+            string jsonFile = "PlayerData.json";  // JSON 파일명
+            string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
+            try
+            {
+                // Player 객체를 JSON 문자열로 직렬화
+                string json = JsonConvert.SerializeObject(this, Formatting.Indented);
+                File.WriteAllText(jsonPath, json); // 파일에 저장
+                Console.WriteLine("Player data saved successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error saving player data: {ex.Message}");
+            }
+        }
+        public static Player LoadPlayerData()
+        {
+            string relativePath = @"..\..\..\";
+            string jsonFile = "PlayerData.json";  // JSON 파일명
+            string jsonPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath, jsonFile));
+            try
+            {
+                if (File.Exists(jsonFile))
+                {
+                    // 파일에서 JSON 문자열을 읽어 Player 객체로 역직렬화
+                    string json = File.ReadAllText(jsonFile);
+                    Player player = JsonConvert.DeserializeObject<Player>(json);
+                    Console.WriteLine("Player data loaded successfully!");
+                    return player;
+                }
+                else
+                {
+                    Console.WriteLine("Player data file not found.");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading player data: {ex.Message}");
+                return null;
+            }
         }
     }
        
