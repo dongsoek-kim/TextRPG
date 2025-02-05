@@ -22,12 +22,24 @@ namespace TextRPG
             Draw.DrawFrame();
             ItemManager item = new ItemManager();
             item.ItemLoad();//아이템 로드
-            Draw.GameStart(out name, out job);
-            Player player = new Player(name, job);//플레이어 생성
-            player.InitializeEquipInfo();
-            Merchant merchant= new Merchant();
-            merchant.MakeListOfSellItemNum(player);
+            Player player;
+            player = Player.LoadPlayerData();  // 플레이어 데이터를 불러옴
+
+            if (player.Name == "")//이름이 초기값이라면
+            {
+                Draw.GameStart(out name, out job);
+                player = new Player(name, job);//플레이어 생성
+                player.InitializeEquipInfo();
+            }
+            Merchant merchant;
+            merchant = Merchant.LoadMerchantData();
+            if (merchant.SellItemNum.Count == 0)
+            {
+                merchant = new Merchant();
+                merchant.MakeListOfSellItemNum(player);
+            }
             Inventory inventory = new Inventory();
+            inventory.MakeOwnList(player);
             Dungeon dungeon = new Dungeon();   
             while (true)
             {
@@ -203,6 +215,12 @@ namespace TextRPG
                         {
                             dungeonResult = dungeon.InDungeon(player, input);
                             Draw.InDungeon(player, dungeon, dungeonResult, input);
+                            if (dungeonResult == "Death")
+                            {
+                                Draw.SetCursor_down(1);
+                                Console.ReadKey();
+                                player.Death();
+                            }
                             if (dungeonResult == "LevelUP")
                             {
                                 merchant.MakeListOfSellItemNum(player);
@@ -213,7 +231,15 @@ namespace TextRPG
                         else if (input == 2)
                         {
                             dungeonResult = dungeon.InDungeon(player, input);
-                            Draw.InDungeon(player, dungeon, dungeonResult, input);
+         
+                            Draw.InDungeon(player, dungeon, dungeonResult, input); 
+                            if (dungeonResult == "Death")
+                            {
+                                Draw.SetCursor_down(1);
+                                Console.ReadKey();
+                                player.Death();
+                            }
+
                             if (dungeonResult == "LevelUP")
                             {
                                 merchant.MakeListOfSellItemNum(player);
@@ -223,9 +249,14 @@ namespace TextRPG
                         }
                         else if (input == 3)
                         {
-                            dungeonResult = dungeon.InDungeon(player, input);
+                            dungeonResult = dungeon.InDungeon(player, input);                
                             Draw.InDungeon(player, dungeon, dungeonResult, input);
-
+                            if (dungeonResult == "Death")
+                            {
+                                Draw.SetCursor_down(1);
+                                Console.ReadKey();
+                                player.Death();
+                            }
                             if (dungeonResult == "LevelUP")
                             {
                                 merchant.MakeListOfSellItemNum(player);
@@ -268,6 +299,16 @@ namespace TextRPG
                 }
                 else if (path == 6)
                 {
+                    player.SavePlayerData();
+                    merchant.SaveMerchantData();
+                    break;
+                }
+                else if(path==99)
+                {
+                    player.Name = "";
+                    player.SavePlayerData();
+                    merchant.SellItemNum.Clear();
+                    merchant.SaveMerchantData();
                     break;
                 }
 
